@@ -1,0 +1,18 @@
+$$$----- Input file name 
+
+InputFileName	= "wmp0jets_mhc0"
+
+OutputFileName	= "plots_wmp0jets"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+CrossSection = 143787.04786199666
+
+Efficiency	= 0.00069;
+
+DATA = false
+
+MH2 = 10000
+
+SaveData = true

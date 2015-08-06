@@ -1,0 +1,20 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "list_qcd_1000ToInf"
+
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "qcd_1000ToInf.root"
+
+$$$----- Jet Algorithm
+$JetAlgo = ak5calo
+
+$$$----- Select HLT bit: HLT_L1JetsU, HLT_Jet15U, HLT_Jet30U, HLT_Jet50U
+$HLTbit	= HLT_Jet,HLT_DiJet,HLT_DiJetAve,HLT_HT,HLT_Meff
+
+$$$----- Maximum number of jets to be saved 
+$MAX_NJETS = 4
+
+DATA = false

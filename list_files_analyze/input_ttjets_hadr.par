@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ttjets_hadr_mhc0"
+
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_ttjets_hadr"
+
+CrossSection = 562.7
+
+Efficiency	= 0.0;
+
+DATA = false
+
+MH2 = 10000
+
+SaveData = true

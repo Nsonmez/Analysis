@@ -1,0 +1,20 @@
+$$$----- Input file name
+
+InputFileName	= "back_singletop_tw_mhc0"
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_back_singletop_tw"
+
+CrossSection = 54.445885840029987
+
+Efficiency	= 0.05827;
+
+DATA = false
+
+MH2 = 10000
+
+SaveData = true

@@ -1,0 +1,17 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "wbb3jets_mhc0"
+
+$$$----- Number of Events to Process
+NEntries = 1000000
+$NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_wbb3jets"
+
+
+$$$----- Maximum number of jets to be saved 
+$MAX_NJETS = 4
+
+DATA = false

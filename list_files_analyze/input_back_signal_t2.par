@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "back_singletop_t2_mhc0"
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_back_singletop_t2"
+
+CrossSection = 176.08374950986266
+
+Efficiency	= 0.03554;
+
+DATA = false
+
+MH2 = 10000
+
+SaveData = true

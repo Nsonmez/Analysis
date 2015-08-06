@@ -1,0 +1,42 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "list_qcd_500To1000"
+
+$list_singleTop_s
+$list_singleTop_t2
+$list_singleTop_t3
+$list_singleTop_tw
+
+$list_QCD_HT-1000ToInf
+$list_QCD_HT-100To250
+$list_QCD_HT-250To500
+$list_QCD_HT-500To1000
+
+$list_ttJets
+
+$list_wmpjets
+
+$list_backSingleTop_s
+$list_backSingleTop_t2
+$list_backSingleTop_t3
+$list_backSingleTop_tw
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "qcd_500To1000.root"
+
+$$$----- Jet Algorithm
+$JetAlgo = ak5calo
+
+$$$----- Select HLT bit: HLT_L1JetsU, HLT_Jet15U, HLT_Jet30U, HLT_Jet50U
+$HLTbit	= HLT_Jet,HLT_DiJet,HLT_DiJetAve,HLT_HT,HLT_Meff
+
+$$$----- Maximum number of jets to be saved 
+$MAX_NJETS = 4
+
+DATA = false
+DATA = false

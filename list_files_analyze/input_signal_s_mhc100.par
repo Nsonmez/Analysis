@@ -1,0 +1,20 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName   = "singletop_s_mhc100"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_singletop_s"
+
+CrossSection = 0.54944811456987097
+
+Efficiency	= 0.0176959;
+
+DATA = true
+
+MH2 = 10000
+
+SaveData = true

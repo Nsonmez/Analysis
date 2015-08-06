@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName   = "singletop_t3_mhc90"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_singletop_t3"
+
+CrossSection = 10.016903683997308
+
+Efficiency	= 0.0147309;
+
+DATA = true
+
+MH2 = 8100
+
+SaveData = true
+

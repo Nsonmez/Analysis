@@ -1,0 +1,20 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ttjets_semilept_mhc0"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_ttjets_semilept"
+
+CrossSection = 364.7
+
+Efficiency	= 0.13014;
+
+DATA = false
+
+MH2 = 10000
+
+SaveData = true

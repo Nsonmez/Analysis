@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "wc1jets_mhc0"
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_wc1jets"
+
+CrossSection = 7271.9538068456850
+
+Efficiency	= 0.01492;
+
+DATA = false
+
+MH2 = 10000
+
+SaveData = true

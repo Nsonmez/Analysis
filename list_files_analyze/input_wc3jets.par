@@ -1,0 +1,14 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "wc3jets_mhc0"
+
+$$$----- Number of Events to Process
+NEntries = 1000000
+$NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "plots_wc3jets"
+
+
+DATA = false
