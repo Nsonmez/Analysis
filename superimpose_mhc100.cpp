@@ -28,7 +28,7 @@
 #include "TLegend.h"
 #include "Utilities.h"
 
-#include "/Users/nsonmez/root/macros/tdrStyle.C"
+//#include "/Users/nsonmez/root/macros/tdrStyle.C"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ int main()
 {
     gStyle->SetOptStat("n");
 
-	setTDRStyle();
+	//setTDRStyle();
 	char h_name[1000];
 	
 	int mhc=100;
