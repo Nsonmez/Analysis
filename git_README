@@ -1,0 +1,18 @@
+git config --global  user.name nsonmez
+
+git config --global user.email nasufsonmez@gmail.com
+
+
+
+
+
+git init 
+
+#adds all the files in the folder.
+git add .
+
+git commit -m "type your commit message here"
+
+git push origin master
+
+
