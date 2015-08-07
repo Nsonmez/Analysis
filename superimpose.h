@@ -39,7 +39,7 @@ double cross_sections[] =
 {
     
     //mhc100 icin degerler
-    0.36*0.549,					// singletop_s
+    0.36*0.549,				// singletop_s
     0.36*15.514771802801450,	// singletop_s
     0.36*13.512667626306223,	// singletop_s
     0.36*0.96083416733012073,	// singletop_s
@@ -57,12 +57,12 @@ double cross_sections[] =
     143787.04786199666,		// wmp0jets
     45457.421706146481,		// wmp1jets
     17028.775569156776,    	// wmp2jets
-    //5800.3387351386527,   // wmp3jets
+    //5800.3387351386527,     // wmp3jets
     
     9415.0009155022526,		// wc0jets
     7271.9538068456850,		// wc1jets
     3708.1308715138002,    	// wc2jets
-    //1622.8438854931915,   // wc3jets
+    //1622.8438854931915,     // wc3jets
     
     110.84542630992861,		// wbb0jets
     214.67538706479982,		// wbb1jets
@@ -70,7 +70,41 @@ double cross_sections[] =
     //114.9			    	// wbb3jets
 };
 
-
+//Matched cross section
+double nevents[] =
+{
+    
+    //mhc100 icin degerler
+    1000000*0.36,					// singletop_s
+    1000000*0.36,	// singletop_s
+    1000000*0.36,	// singletop_s
+    1000000*0.36,	// singletop_s
+    
+    
+    1000000,		//back_singletop_s
+    1099999,		//back_singletop_t2
+    1000000,		//back_singletop_t3
+    1100000,		//back_singletop_tw
+    
+    845786,					// ttjets_lept
+    853378,					// ttjets_semilept
+    852616,					// ttjets_hadr
+    
+    30400000,		// wmp0jets
+    3775793,		// wmp1jets
+    2142360,    	// wmp2jets
+    //5800.3387351386527,   // wmp3jets
+    
+    3006604,		// wc0jets
+    1636475,		// wc1jets
+    1247244,    	// wc2jets
+    //1622.8438854931915,   // wc3jets
+    
+    1000000,		// wbb0jets
+    1164558,		// wbb1jets
+    664725,    	// wbb2jets
+    //114.9			    	// wbb3jets
+};
 	double total_cross_b =228613.1851;
 	double total_cross_s =30.5372736*0.36; //mhc100 icin degerler
 
@@ -124,4 +158,8 @@ TH1F * jet_size_cut9_50[number_of_datasets];
 TH2F * bjet_lepton_dR[number_of_datasets];
 TH2F * bjet_lepton_dEta[number_of_datasets];
 TH2F * bjet_lepton_dPhi[number_of_datasets];
+
+//TVectorD *cross_sections[number_of_datasets];
+TVectorD *effdata[number_of_datasets];
+
 

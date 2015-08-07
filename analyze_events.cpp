@@ -65,7 +65,7 @@ int main(int argc, char*argv[])
     char OutputFileTag[100];
     sprintf(OutputFileTag,"mhc%.0f",sqrt(MH2));
     
-    string outputfile = OutputFileName + "_" + OutputFileTag + ".root";
+    string outputfile = "plots/"+OutputFileName + "_" + OutputFileTag + ".root";
     TFile *outf = new TFile(outputfile.c_str(),"RECREATE");
     //TFile *outf = new TFile(OutputFileName.c_str(),"RECREATE");
     
@@ -194,7 +194,7 @@ int main(int argc, char*argv[])
     //---------------------------------------------------------------------------------------------------------
 	
 
-	string inputfile = "filtered_events_v2/"+InputFileName + ".root";
+	string inputfile = "../filtered_events_v3/"+InputFileName + ".root";
 
 	TFile *inf  = new TFile(inputfile.c_str());
     TTree *data = (TTree*)inf->Get("DATA");
@@ -253,7 +253,8 @@ int main(int argc, char*argv[])
     int event_counter8_after_onejet=0;
     int event_counter9_after_onejet=0;
     int event_counter10_after_jeteta=0;
-    
+    int final_counter=0;
+
     //int part_counter=0;
     int signal_counter=0;
     int nevents=0;
@@ -291,22 +292,26 @@ int main(int argc, char*argv[])
 		////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////
 
-		
+        if(lep.ID==11 && lep.PT < 23) continue;
+        if(lep.ID==13 && lep.PT < 35) continue;
+        
+        
+
         if(lep.ID==11)
         {
-            histElec_pt->Fill(lep.Pt);
+            histElec_pt->Fill(lep.PT);
             histElec_eta->Fill(lep.Eta);
             histElec_phi->Fill(lep.Phi);
         }
         else
             if(lep.ID==13)
             {
-                histMuon_pt->Fill(lep.Pt);
+                histMuon_pt->Fill(lep.PT);
                 histMuon_eta->Fill(lep.Eta);
                 histMuon_phi->Fill(lep.Phi);
             }
 
-        histLepton_pt->Fill(lep.Pt);
+        histLepton_pt->Fill(lep.PT);
         histLepton_eta->Fill(lep.Eta);
         histLepton_phi->Fill(lep.Phi);
 
@@ -316,8 +321,8 @@ int main(int argc, char*argv[])
         // filter the event if there is lepton PT>55
         //////////////////////////////////////////////////////////
 
-		//if ( lep.Pt  < 50 && lep.Pt > 30 ) continue;
-		if ( lep.Pt > 35 ) continue;
+		//if ( lep.PT  < 50 && lep.PT > 30 ) continue;
+		if ( lep.PT > 35 ) continue;
 
         event_counter3_after_leptonpt55++;
 
@@ -381,11 +386,15 @@ int main(int argc, char*argv[])
         //////////////////////////////////////////////////////////////////////////////////////
         
 
+		//////////////////////////////////////////////////////////////////////////////////////
+		// BJET-LEPTON ETA DISTRIBUTION
+		//////////////////////////////////////////////////////////////////////////////////////
+
 		double deltaR2=pow(abs( (this_bjet.Eta)-(lep.Eta) ),2)+pow(abs( (this_bjet.Phi)-(lep.Phi) ),2);
         double deltaEta=abs( (this_bjet.Eta)-(lep.Eta) );
-		bjet_lepton_delta_eta->Fill( lep.Pt, deltaEta );
-        bjet_lepton_delta_phi->Fill( lep.Pt, abs( (this_bjet.Phi)-(lep.Phi) ));
-        bjet_lepton_deltaR->Fill( lep.Pt, sqrt(deltaR2) );
+		bjet_lepton_delta_eta->Fill( lep.PT, deltaEta );
+        bjet_lepton_delta_phi->Fill( lep.PT, abs( (this_bjet.Phi)-(lep.Phi) ));
+        bjet_lepton_deltaR->Fill( lep.PT, sqrt(deltaR2) );
 
 
 		hist_qlep_etajet->Fill(lep.Charge * jet[0].Eta);
@@ -397,7 +406,7 @@ int main(int argc, char*argv[])
         //////////////////////////////////////////////////////////////////////////////////////
         // TOP INVARIANT MASS
         //////////////////////////////////////////////////////////////////////////////////////
-		
+
         double miss_pz_mhc=missing_energy_pz(&lep,  &event, MH2);
 			
         double top_inv_mass_mhc=top_invariant_mass(&this_bjet, &lep, &event, MH2);
@@ -406,20 +415,22 @@ int main(int argc, char*argv[])
 			
         hist_top_inv_mass_mhc->Fill(top_inv_mass_mhc);
 		
-
-		double leptoninvariantmass=lepton_invariant_mass(&lep, &event);
-        lepton_invmass->Fill(leptoninvariantmass);
-		
         if ( top_inv_mass_mhc < 220  ) continue;
         event_counter6_after_topinvmass++;
-        
+
+		//////////////////////////////////////////////////////////////////////////////////////
+		// LEPTON INVARIANT MASS
+		//////////////////////////////////////////////////////////////////////////////////////
+
+		double leptoninvariantmass=lepton_invariant_mass(&lep, &event);
+		lepton_invmass->Fill(leptoninvariantmass);
+
         if ( leptoninvariantmass > 60  ) continue;
         event_counter7_after_leptinvmass++;
         
-        
-        ////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
         //	JET BRANCH
-        ////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
         int numb_hardjet=0;
         
         // eliminate hard jets
@@ -455,7 +466,7 @@ int main(int argc, char*argv[])
                 this_softjet=jet[i];
             }
         }
-
+		
         jet_size_cut9->Fill(numb_softjet);
         
 		//if (numb_softjet!=1) continue;
@@ -465,20 +476,45 @@ int main(int argc, char*argv[])
         hist_before_jet_eta->Fill(this_hardjet.Eta);
 		//if ( abs(this_hardjet.Eta) < 2.5 ) continue;
         event_counter10_after_jeteta++;
+        
+        final_counter++;
 		
     }	//end of event loop
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    TVectorD *crossdata = (TVectorD*)inf->Get("cross");
+    TVectorD *effdata   = (TVectorD*)inf->Get("eff");
     
+	double test=(*crossdata)[0];
+
+	outf->cd();
+	TVectorD cross1(1);
+	cross1[0] = cross;
+	cross1.Write("cross");
+	
+	TVectorD eff1(12);
+	eff1[0]  =  (*effdata)[0];
+	eff1[1]  =  (double)event_counter3_after_leptonpt55/nevents;
+	eff1[2]  =  (double)event_counter4_after_met/nevents;
+	eff1[3]  =  (double)event_counter4_after_alpha_t/nevents;
+	eff1[4]  =  (double)event_counter5_after_btag/nevents;
+	eff1[5]  =  (double)event_counter5a_after_deltaEta/nevents;
+	eff1[6]  =  (double)event_counter6_after_topinvmass/nevents;
+	eff1[7]  =  (double)event_counter7_after_leptinvmass/nevents;
+	eff1[8]  =  (double)event_counter8_after_onejet/nevents;
+	eff1[9]  =  (double)event_counter9_after_onejet/nevents;
+	eff1[10] =  (double)event_counter10_after_jeteta/nevents;
+	eff1[11] =  (double)final_counter/nevents;
+	eff1.Write("eff");
+	
     //---------------------------------------------------------------------------------------------------------
     ////////////////////////////////  Saving the histograms into output  //////////////////////////////////////////
     //---------------------------------------------------------------------------------------------------------
     // end of event loop
     
     cout << "nevents : " << nevents << endl;
-    cout << "signal_counter :  " << signal_counter << "  %  " << (double)signal_counter/nevents << endl;
     cout << "_____________________________________________________________________" << endl;
     cout << " 0  event after trigger     : "    << event_counter0_after_trigger     << "\t" << (double)event_counter0_after_trigger/nevents     << endl;
     cout << " 1  event after hard photon : "    << event_counter1_after_hardphoton  << "\t" << (double)event_counter1_after_hardphoton/nevents  << endl;
@@ -493,9 +529,15 @@ int main(int argc, char*argv[])
     cout << " 8  event after numb_jet =1 : "    << event_counter8_after_onejet      << "\t" << (double)event_counter8_after_onejet/nevents      << endl;
     cout << " 9  event after numb_jet =1 : "    << event_counter9_after_onejet      << "\t" << (double)event_counter9_after_onejet/nevents      << endl;
     cout << " 10 event after jet_eta>2.5 : "    << event_counter10_after_jeteta     << "\t" << (double)event_counter10_after_jeteta/nevents     << endl;
+    cout << " 10 final counter           : "    << final_counter     << "\t" << (double)final_counter/nevents     << endl;
+
     cout << "_____________________________________________________________________" << endl;
-    cout << " number of expct events L=1fb^-1  : "    << "\t" << (double)event_counter10_after_jeteta/nevents*cross*1000 ;
+	cout << " ntuple create eff : "<< (*effdata)[0];
+	cout << "    analyze event eff : " << (double)final_counter/nevents;
+	cout << "    final eff " << (*effdata)[0]*final_counter/nevents << endl;
+    cout << " number of expct events L=1fb^-1  : "    << "\t" << (double)final_counter/nevents*(*effdata)[0]*cross*1000 ;
     cout << "\t" << InputFileName.c_str() << endl;
+    
     
     //myfile.close();
     outf->Write();

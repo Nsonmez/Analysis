@@ -48,7 +48,7 @@ typedef struct
 
 typedef struct
 {
-    double	Pt;
+    double	PT;
     double  Eta;
     double  Phi;
     int Charge;
@@ -76,7 +76,7 @@ double lepton_invariant_massv2(JET *bjet, LEPTON *ptlep, EVENT_VAR *miss, double
     TLorentzVector particle_lep;
     TLorentzVector particle_bjet;
     
-    particle_lep.SetPtEtaPhiM(ptlep->Pt, ptlep->Eta, ptlep->Phi, 0.000);
+    particle_lep.SetPtEtaPhiM(ptlep->PT, ptlep->Eta, ptlep->Phi, 0.000);
     particle_bjet.SetPtEtaPhiM(bjet->PT, bjet->Eta,  bjet->Phi,  0.005);
     
     double plx=particle_lep.Px();
@@ -113,12 +113,12 @@ double lepton_invariant_massv2(JET *bjet, LEPTON *ptlep, EVENT_VAR *miss, double
 
 double lepton_invariant_mass(LEPTON *ptlep, EVENT_VAR *miss)
 {
-    double plx=(ptlep->Pt)*cos(ptlep->Phi);
-    double ply=(ptlep->Pt)*sin(ptlep->Phi);
+    double plx=(ptlep->PT)*cos(ptlep->Phi);
+    double ply=(ptlep->PT)*sin(ptlep->Phi);
     double misspx=(miss->MET)*cos(miss->METPhi);
     double misspy=(miss->MET)*sin(miss->METPhi);
     
-    double result=sqrt(2*(ptlep->Pt)*(miss->MET)-2*(plx*misspx+ply*misspy ));
+    double result=sqrt(2*(ptlep->PT)*(miss->MET)-2*(plx*misspx+ply*misspy ));
     return result;
 }
 
@@ -129,7 +129,7 @@ double top_invariant_mass(JET *bjet, LEPTON *ptlep, EVENT_VAR *miss, double MH2)
     TLorentzVector particle_lep;
     TLorentzVector particle_bjet;
     
-    particle_lep.SetPtEtaPhiM(ptlep->Pt, ptlep->Eta, ptlep->Phi, 0.000);
+    particle_lep.SetPtEtaPhiM(ptlep->PT, ptlep->Eta, ptlep->Phi, 0.000);
     particle_bjet.SetPtEtaPhiM(bjet->PT, bjet->Eta,  bjet->Phi,  0.005);
     
     double plx=particle_lep.Px();
@@ -197,10 +197,10 @@ double top_invariant_mass(JET *bjet, LEPTON *ptlep, EVENT_VAR *miss, double MH2)
 //----------------------------------------------------------------------------------------
 double missing_energy_pz(LEPTON *ptlep, EVENT_VAR *miss, double MH2)
 {
-    double plx=(ptlep->Pt)*cos(ptlep->Phi);
-    double ply=(ptlep->Pt)*sin(ptlep->Phi);
-    double plz=(ptlep->Pt)*sinh(ptlep->Eta);
-    double pl  =(ptlep->Pt)*cosh(ptlep->Eta); //massless lepton energy
+    double plx=(ptlep->PT)*cos(ptlep->Phi);
+    double ply=(ptlep->PT)*sin(ptlep->Phi);
+    double plz=(ptlep->PT)*sinh(ptlep->Eta);
+    double pl  =(ptlep->PT)*cosh(ptlep->Eta); //massless lepton energy
     double misspx=(miss->MET)*cos(miss->METPhi);
     double misspy=(miss->MET)*sin(miss->METPhi);
     
