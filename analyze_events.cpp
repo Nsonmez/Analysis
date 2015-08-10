@@ -110,7 +110,7 @@ int main(int argc, char*argv[])
 	TH1 *histJet_btag_eta_afterbjet1cut = new TH1F("histJet_btag_eta_afterbjet1cut", "ETA of B-tagged jets", 100, -5.0, +5.0);
 
 	
-	int btag[12]={30,35,40,45,50,55,60,65,70,80,90,100};
+	int btag[12]={35,40,45,50,55,60,65,70,80,90,100,110};
 	TH1F *histJet_btag_ptbigger[12];
 	for (int i=0; i<12; i++)
 	{
@@ -146,7 +146,6 @@ int main(int argc, char*argv[])
     
     //TH2 *hist_gen_muon_SIM1GEN0	= new TH2F("hist_gen_muon_SIM1GEN0"	, "Number of Muon : GEN=0  and SIM=1 ;PT;ETA", 100, 0, 100,100,-5,+5);
     //TH2 *hist_gen_muon_SIM0GEN1	= new TH2F("hist_gen_muon_SIM0GEN1"	, "Number of Muon : GEN=1  and SIM=0 ;PT;ETA", 100, 0, 100,100,-5,+5);
-    
     
     //TH1 *hist_gen_elec_pt		= new TH1F("hist_gen_elec_pt"	, "Elec Pt " , 100, 0, 250);
     //TH1 *hist_gen_elec_phi		= new TH1F("hist_gen_elec_phi"	, "Elec Phi ", 100, -5, 5);
@@ -185,7 +184,7 @@ int main(int argc, char*argv[])
     TH2 *bjet_lepton_deltaR     = new TH2F("bjet_lepton_deltaR"      , "Delta R between lepton and btagjet   ", 100, 0, 250, 100, 0,  +10);
     TH1 *hist_qlep_etajet       = new TH1F("hist_qlep_etajet"      , " lepton charge x jet eta  ", 100, -3, 3);
     TH2 *bjet_qeta				= new TH2F("bjet_qeta"      ,"Bjet Eta #cdot  lepton charge   ", 100, 0, 250, 100, 0,  +10);
-	
+
 	sprintf(hist_name,"top inv mass assume mhc=%f.2",sqrt(MH2));
     TH1 *hist_top_inv_mass_mhc 	= new TH1F("top_inv_mass_mhc"   , hist_name, 100, 0, 500);
 
@@ -296,8 +295,8 @@ int main(int argc, char*argv[])
         // 0. TRIGGER EMULATION
         ////////////////////////////////////////////////////////////////////////////////////
 		/*
-		1. Analysis over the lepton cut for PT > MUONPT_CUT or PT > ELECTRONPT_CUT in the central region
-			then if there is a soft lepton get rid of this event.
+		1. Analysis over the lepton cut for PT > MUONPT_CUT or PT > ELECTRONPT_CUT
+         in the central region then if there is a soft lepton get rid of this event.
 		2. All THESE events are just for single lepton trigger passed ones.
 		*/
 		
@@ -306,8 +305,6 @@ int main(int argc, char*argv[])
 
         if(lep.ID==11 && lep.PT < 25) continue;
         if(lep.ID==13 && lep.PT < 35) continue;
-        
-        
 
         if(lep.ID==11)
         {
@@ -328,7 +325,6 @@ int main(int argc, char*argv[])
         histLepton_phi->Fill(lep.Phi);
 
         //////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////
         // KINEMATICAL CUT on Leptons PT
         // filter the event if there is lepton PT>55
         //////////////////////////////////////////////////////////
@@ -339,20 +335,20 @@ int main(int argc, char*argv[])
         event_counter3_after_leptonpt55++;
 
         ////////////////////////////////////////////////////////////////////
-        //  MET cut, if MET < 60 gev then discard this event
+        //  MET cut
         ////////////////////////////////////////////////////////////////////
 
         histMET_et->Fill(event.MET);
         histMET_eta->Fill(event.METEta);
         histMET_phi->Fill(event.METPhi);
 		
-		//		double MET_CUT=40;
+		// double MET_CUT=40;
 		double MET_CUT=55;
         if (event.MET < MET_CUT ) continue;
         event_counter4_after_met++;
-        
+
         ////////////////////////////////////////////////////////////////////
-        //	BTAG FILTER
+        //	ALPHA_T FILTER
         ////////////////////////////////////////////////////////////////////
         
         double alpha_t=0;
@@ -360,12 +356,13 @@ int main(int argc, char*argv[])
         alpha_t=(double)(jet[1].PT)/jet_inv_mass12;
         hist_alpha_t->Fill(alpha_t);
         
-        
-        // go to the end of the loop for alpha_t>0.5,
-        // because we assume these are qcd events
-		//if( alpha_t > 0.4 ) continue;
+        //if( alpha_t > 0.4 ) continue;
         event_counter4_after_alpha_t++;
-		
+
+        ////////////////////////////////////////////////////////////////////
+        //	BTAG FILTER
+        ////////////////////////////////////////////////////////////////////
+
         int counter_btag=0;
 		for (int j=0; j<12; j++)
 		{
@@ -373,16 +370,20 @@ int main(int argc, char*argv[])
 			// filter bjet tagged events
 			for (int i=0; i<NJET_MAX; i++)
 			{
-				if( jet[i].PT > btag[j] && jet[i].BTag==1 ) counter_btag++;
+				if( jet[i].BTag==1 && jet[i].PT > 30 && jet[i].PT < btag[j] ) counter_btag++;
 			}
 			histJet_btag_ptbigger[j]->Fill(counter_btag);
         }
-		counter_btag=0;
-		
-		JET this_bjet;
+        
+        
+        
+        
+        JET this_bjet;
+        counter_btag=0;
+
 		for (int i=0; i<NJET_MAX; i++)
 		{
-			if( jet[i].PT > 50 && jet[i].BTag==1 )
+			if( jet[i].PT < 100 && jet[i].BTag==1 )
 			{
 				histJet_btag_pt->Fill(jet[i].PT);
 				histJet_btag_eta->Fill(jet[i].Eta);
@@ -393,18 +394,18 @@ int main(int argc, char*argv[])
 		histJet_btag->Fill(counter_btag);
 
 		if ( counter_btag != 1 ) continue;
-		
+
 		histJet_btag_pt_afterbjet1cut->Fill(this_bjet.PT);
 		histJet_btag_eta_afterbjet1cut->Fill(this_bjet.Eta);
 
-		
-		//if ( this_bjet.PT <30 || this_bjet.PT >70  ) continue;
+
+		if ( this_bjet.PT <40 ) continue;
         event_counter5_after_btag++;
-        
+
         
         //////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////
-        counter_saved++;
+        //counter_saved++;
         //if ( SaveData && (double)cross*200*efficiency < counter_saved ) break;
         //////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////
@@ -419,7 +420,6 @@ int main(int argc, char*argv[])
 		bjet_lepton_delta_eta->Fill( lep.PT, deltaEta );
         bjet_lepton_delta_phi->Fill( lep.PT, abs( (this_bjet.Phi)-(lep.Phi) ));
         bjet_lepton_deltaR->Fill( lep.PT, sqrt(deltaR2) );
-
 
 		hist_qlep_etajet->Fill(lep.Charge * jet[0].Eta);
         bjet_qeta->Fill(this_bjet.PT, lep.Charge * this_bjet.Eta);
@@ -439,7 +439,7 @@ int main(int argc, char*argv[])
 			
         hist_top_inv_mass_mhc->Fill(top_inv_mass_mhc);
 		
-        if ( top_inv_mass_mhc < 230  ) continue;
+        //if ( top_inv_mass_mhc < 230  ) continue;
         event_counter6_after_topinvmass++;
 
 		//////////////////////////////////////////////////////////////////////////////////////

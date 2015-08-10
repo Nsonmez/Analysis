@@ -34,7 +34,6 @@
 using namespace std;
 
 #include "superimpose.h"
-//int main(int argc, char*argv[])
 
 int main()
 {
@@ -123,7 +122,7 @@ int main()
         bjet_lepton_dPhi[a]         =(TH2F*)rootfile[a]->Get("lepton/bjet_lepton_delta_phi");
 
 		//cross_sections[a]			= (TVectorD*)rootfile[a]->Get("cross");
-		effdata[a]					= (TVectorD*)rootfile[a]->Get("eff");
+		//effdata[a]					= (TVectorD*)rootfile[a]->Get("eff");
 
 	}
 	cout << "Histos reading ..." << endl;
@@ -313,7 +312,7 @@ int main()
         }
 
         TCanvas *canvas1a = new TCanvas("name1abc","beforetrigg",2500,0,600,500);
-        lepton_numb_before_trig_sig->Draw();
+        lepton_numb_before_trig_sig->Draw("");
         lepton_numb_before_trig_sig->SetLineColor(2);
         lepton_numb_before_trig_back->Draw("same");
         lepton_numb_before_trig_sig->SetLineWidth(3);
@@ -458,6 +457,149 @@ int main()
 		
 	}
 	
+/////////////////////////////////////////////////////////////////////////
+//// COMPARISON FOR BTAG
+/////////////////////////////////////////////////////////////////////////
+    
+    if(comparison_for_btag)
+    {
+        
+        cout << " --> comparison_for_btag" << endl;
+        
+        
+        
+        TH1F * btag_numb_sig  = new TH1F("btag_numb_sig" ,"BTAG Jet Numb Distrib Sig;Number of BTAG Jets;Relative Occurence", 10, 0, 10);
+        TH1F * btag_numb_back = new TH1F("btag_numb_back","BTAG Jet Numb Distrib Back;Number of BTAG Jets;Relative Occurence", 10, 0, 10);
+        // analysis over the signal
+        for (int a=0;a<4;a++)
+        {
+            jet_btag[a]->Scale( scale[a] );
+            btag_numb_sig->Add(jet_btag[a]);
+        }
+        btag_numb_sig->Scale(1.0/btag_numb_sig->Integral());
+        
+        for (int a=4;a<number_of_datasets;a++)
+        {
+            jet_btag[a]->Scale( scale[a] );
+            btag_numb_back->Add(jet_btag[a]);
+        }
+        btag_numb_back->Scale(1.0/btag_numb_back->Integral());
+        
+        TCanvas *canvas7a = new TCanvas("name7a","title",2500,0,600,500);
+        btag_numb_sig->GetYaxis()->SetRangeUser(0.00001,1);
+        btag_numb_back->GetYaxis()->SetRangeUser(0.00001,1);
+        btag_numb_back->GetXaxis()->SetRangeUser(0,5);
+        btag_numb_sig->GetXaxis()->SetRangeUser(0,5);
+        btag_numb_sig->SetLineColor(2);
+        btag_numb_sig->SetLineWidth(3);
+        btag_numb_back->SetLineWidth(3);
+        btag_numb_sig->Draw("HTEXT0");
+        btag_numb_back->Draw("same HTEXT0");
+        //btag_numb_sig->Draw("");
+        //btag_numb_back->Draw("same");
+        btag_numb_sig->SetFillColor(2);
+        btag_numb_sig->SetFillStyle(3002);
+        canvas7a->BuildLegend();
+        //canvas7a->SetLogy();
+        canvas7a->SetLeftMargin(0.127517);
+        canvas7a->SetRightMargin(0.02013423);
+        btag_numb_back->SetStats(0);
+        btag_numb_sig->SetStats(0);
+        sprintf(h_name,"6btag_numb_mhc%i.eps", mhc);
+        canvas7a->Print(h_name);
+        
+        
+
+        
+        
+        
+        TH1F * btag_pt_sig  = new TH1F("btag_pt_sig"  ,"BTAG Jet PT Distrib Sig;P_{T}^{b-jet} [GeV];Relative Occurence", 100, 0, 500);
+        TH1F * btag_pt_back = new TH1F("btag_pt_back" ,"BTAG Jet PT Distrib Back;P_{T}^{b-jet} [GeV];Relative Occurence", 100, 0, 500);
+        // analysis over the signal
+        for (int a=0;a<4;a++)
+        {
+            jet_btag_pt[a]->Scale( scale[a] );
+            btag_pt_sig->Add(jet_btag_pt[a]);
+        }
+        btag_pt_sig->Scale(1.0/btag_pt_sig->Integral());
+        
+        
+        for (int a=4;a<number_of_datasets;a++)
+        {
+            if (jet_btag_pt[a]->GetEntries()==0)continue;
+            jet_btag_pt[a]->Scale( scale[a] );
+            btag_pt_back->Add(jet_btag_pt[a]);
+        }
+        btag_pt_back->Scale(1.0/btag_pt_back->Integral());
+        
+        TCanvas *canvas6a = new TCanvas("name6a","title",2500,0,600,500);
+        btag_pt_sig->GetYaxis()->SetRangeUser(0.00001,0.15);
+        btag_pt_back->GetYaxis()->SetRangeUser(0.00001,0.15);
+        btag_pt_sig->GetXaxis()->SetRangeUser(0,250);
+        btag_pt_back->GetXaxis()->SetRangeUser(0,250);
+        btag_pt_sig->SetLineColor(2);
+        btag_pt_sig->SetLineWidth(3);
+        btag_pt_back->SetLineWidth(3);
+        btag_pt_sig->Draw("");
+        btag_pt_back->Draw("same");
+        btag_pt_sig->SetFillColor(2);
+        btag_pt_sig->SetFillStyle(3002);
+        canvas6a->BuildLegend();
+        //canvas6a->SetLogy();
+        canvas6a->SetLeftMargin(0.127517);
+        canvas6a->SetRightMargin(0.02013423);
+        btag_pt_back->SetStats(0);
+        btag_pt_sig->SetStats(0);
+        
+        sprintf(h_name,"6btag_pt_mhc%i.eps", mhc);
+        canvas6a->Print(h_name);
+        
+        
+        
+        
+        
+        TH1F * btag_eta_sig  = new TH1F("btag_eta_sig" ,"BTAG Jet Eta Distrib Sig;ETA;Relative Occurence", 100, -5, +5);
+        TH1F * btag_eta_back = new TH1F("btag_eta_back","BTAG Jet Eta Distrib Back;ETA;Relative Occurence", 100, -5, +5);
+        
+        // analysis over the signal
+        for (int a=0;a<4;a++)
+        {
+            jet_btag_eta[a]->Scale( scale[a] );
+            btag_eta_sig->Add(jet_btag_eta[a]);
+        }
+        btag_eta_sig->Scale(1.0/btag_eta_sig->Integral());
+        for (int a=4;a<number_of_datasets;a++)
+        {
+            if (jet_btag_eta[a]->GetEntries()==0)continue;
+            jet_btag_eta[a]->Scale( scale[a] );
+            btag_eta_back->Add(jet_btag_eta[a]);
+        }
+        btag_eta_back->Scale(1.0/btag_eta_back->Integral());
+        
+        TCanvas *canvas7b = new TCanvas("name7b","title",2500,0,600,500);
+        btag_eta_sig->GetYaxis()->SetRangeUser(0.0,0.1);
+        btag_eta_back->GetYaxis()->SetRangeUser(0.0,0.1);
+        btag_eta_sig->Rebin(2);
+        btag_eta_back->Rebin(2);
+        btag_eta_sig->SetLineColor(2);
+        btag_eta_sig->SetLineWidth(3);
+        btag_eta_back->SetLineWidth(3);
+        btag_eta_sig->Draw();
+        btag_eta_back->Draw("same");
+        btag_eta_sig->SetFillColor(2);
+        btag_eta_sig->SetFillStyle(3002);
+        canvas7b->BuildLegend();
+        //canvas7a->SetLogy();
+        canvas7b->SetLeftMargin(0.127517);
+        canvas7b->SetRightMargin(0.02013423);
+        btag_eta_back->SetStats(0);
+        btag_eta_sig->SetStats(0);
+        //btag_eta_back->GetXaxis()->SetRangeUser(0,5);
+        //btag_eta_sig->GetXaxis() ->SetRangeUser(0,5);
+        sprintf(h_name,"6btag_eta_mhc%i.eps", mhc);
+        canvas7b->Print(h_name);
+        
+    }
 
 /////////////////////////////////////////////////////////////////////////
 // COMPARISON FOR MET 
@@ -570,140 +712,6 @@ int main()
 		canvas4b->Print(h_name);
 	}
 
-/////////////////////////////////////////////////////////////////////////
-//// COMPARISON FOR BTAG
-/////////////////////////////////////////////////////////////////////////
-
-    if(comparison_for_btag)
-    {
-		
-		cout << " --> comparison_for_btag" << endl;
-
-		TH1F * btag_pt_sig  = new TH1F("btag_pt_sig"  ,"BTAG Jet PT Distrib Sig;P_{T}^{b-jet} [GeV];Relative Occurence", 100, 0, 500);
-		TH1F * btag_pt_back = new TH1F("btag_pt_back" ,"BTAG Jet PT Distrib Back;P_{T}^{b-jet} [GeV];Relative Occurence", 100, 0, 500);
-		// analysis over the signal
-		for (int a=0;a<4;a++)
-		{
-			jet_btag_pt[a]->Scale( scale[a] );
-			btag_pt_sig->Add(jet_btag_pt[a]);
-		}
-		btag_pt_sig->Scale(1.0/btag_pt_sig->Integral());
-
-		
-		for (int a=4;a<number_of_datasets;a++)
-		{
-            if (jet_btag_pt[a]->GetEntries()==0)continue;
-			jet_btag_pt[a]->Scale( scale[a] );
-			btag_pt_back->Add(jet_btag_pt[a]);
-		}
-		btag_pt_back->Scale(1.0/btag_pt_back->Integral());
-
-		TCanvas *canvas6a = new TCanvas("name6a","title",2500,0,600,500);
-		btag_pt_sig->GetYaxis()->SetRangeUser(0.00001,0.15);
-		btag_pt_back->GetYaxis()->SetRangeUser(0.00001,0.15);
-        btag_pt_sig->GetXaxis()->SetRangeUser(0,250);
-        btag_pt_back->GetXaxis()->SetRangeUser(0,250);
-		btag_pt_sig->SetLineColor(2);
-		btag_pt_sig->SetLineWidth(3);
-		btag_pt_back->SetLineWidth(3);
-		btag_pt_sig->Draw("");
-		btag_pt_back->Draw("same");
-		btag_pt_sig->SetFillColor(2);
-		btag_pt_sig->SetFillStyle(3002);
-		canvas6a->BuildLegend();
-		//canvas6a->SetLogy();
-		canvas6a->SetLeftMargin(0.127517);
-		canvas6a->SetRightMargin(0.02013423);
-		btag_pt_back->SetStats(0);
-		btag_pt_sig->SetStats(0);
-
-		sprintf(h_name,"6btag_pt_mhc%i.eps", mhc);
-		canvas6a->Print(h_name);
-	
-		TH1F * btag_numb_sig  = new TH1F("btag_numb_sig" ,"BTAG Jet Numb Distrib Sig;Number of BTAG Jets;Relative Occurence", 10, 0, 10);
-		TH1F * btag_numb_back = new TH1F("btag_numb_back","BTAG Jet Numb Distrib Back;Number of BTAG Jets;Relative Occurence", 10, 0, 10);
-		// analysis over the signal
-		for (int a=0;a<4;a++)
-		{
-			jet_btag[a]->Scale( scale[a] );
-			btag_numb_sig->Add(jet_btag[a]);
-		}
-		btag_numb_sig->Scale(1.0/btag_numb_sig->Integral());
-
-		for (int a=4;a<number_of_datasets;a++)
-		{
-			jet_btag[a]->Scale( scale[a] );
-			btag_numb_back->Add(jet_btag[a]);
-		}
-		btag_numb_back->Scale(1.0/btag_numb_back->Integral());
-
-		TCanvas *canvas7a = new TCanvas("name7a","title",2500,0,600,500);
-		btag_numb_sig->GetYaxis()->SetRangeUser(0.00001,1);
-		btag_numb_back->GetYaxis()->SetRangeUser(0.00001,1);
-        btag_numb_back->GetXaxis()->SetRangeUser(0,5);
-        btag_numb_sig->GetXaxis()->SetRangeUser(0,5);
-		btag_numb_sig->SetLineColor(2);
-		btag_numb_sig->SetLineWidth(3);
-		btag_numb_back->SetLineWidth(3);
-        //btag_numb_sig->Draw("HTEXT0");
-        //btag_numb_back->Draw("same HTEXT0");
-        btag_numb_sig->Draw("");
-        btag_numb_back->Draw("same");
-		btag_numb_sig->SetFillColor(2);
-		btag_numb_sig->SetFillStyle(3002);
-		canvas7a->BuildLegend();
-		//canvas7a->SetLogy();
-		canvas7a->SetLeftMargin(0.127517);
-		canvas7a->SetRightMargin(0.02013423);
-		btag_numb_back->SetStats(0);
-		btag_numb_sig->SetStats(0);
-		sprintf(h_name,"6btag_numb_mhc%i.eps", mhc);
-		canvas7a->Print(h_name);
-	
-
-		
-		TH1F * btag_eta_sig  = new TH1F("btag_eta_sig" ,"BTAG Jet Eta Distrib Sig;ETA;Relative Occurence", 100, -5, +5);
-		TH1F * btag_eta_back = new TH1F("btag_eta_back","BTAG Jet Eta Distrib Back;ETA;Relative Occurence", 100, -5, +5);
-
-		// analysis over the signal
-		for (int a=0;a<4;a++)
-		{
-			jet_btag_eta[a]->Scale( scale[a] );
-			btag_eta_sig->Add(jet_btag_eta[a]);
-		}
-		btag_eta_sig->Scale(1.0/btag_eta_sig->Integral());
-		for (int a=4;a<number_of_datasets;a++)
-		{
-            if (jet_btag_eta[a]->GetEntries()==0)continue;
-			jet_btag_eta[a]->Scale( scale[a] );
-			btag_eta_back->Add(jet_btag_eta[a]);
-		}
-		btag_eta_back->Scale(1.0/btag_eta_back->Integral());
-	
-		TCanvas *canvas7b = new TCanvas("name7b","title",2500,0,600,500);
-		btag_eta_sig->GetYaxis()->SetRangeUser(0.0,0.1);
-		btag_eta_back->GetYaxis()->SetRangeUser(0.0,0.1);
-		btag_eta_sig->Rebin(2);
-		btag_eta_back->Rebin(2);
-		btag_eta_sig->SetLineColor(2);
-		btag_eta_sig->SetLineWidth(3);
-		btag_eta_back->SetLineWidth(3);
-		btag_eta_sig->Draw();
-		btag_eta_back->Draw("same");
-		btag_eta_sig->SetFillColor(2);
-		btag_eta_sig->SetFillStyle(3002);
-		canvas7b->BuildLegend();
-		//canvas7a->SetLogy();
-		canvas7b->SetLeftMargin(0.127517);
-		canvas7b->SetRightMargin(0.02013423);
-		btag_eta_back->SetStats(0);
-		btag_eta_sig->SetStats(0);
-		//btag_eta_back->GetXaxis()->SetRangeUser(0,5);
-		//btag_eta_sig->GetXaxis() ->SetRangeUser(0,5);
-		sprintf(h_name,"6btag_eta_mhc%i.eps", mhc);
-		canvas7b->Print(h_name);
-
-	}
 
 /////////////////////////////////////////////////////////////////////////
 //// LEPTON - BJET angle

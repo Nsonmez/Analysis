@@ -1,5 +1,7 @@
 #!/bin/bash
 
+make analyze_events
+
 mhc=10000
 
 ./analyze_events list_files_analyze/input_signal_s_mhc100.par
