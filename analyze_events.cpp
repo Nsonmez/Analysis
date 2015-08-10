@@ -56,7 +56,6 @@ int main(int argc, char*argv[])
 	double MH2				= c1.getValue<double>	("MH2");
 	bool SaveData			= c1.getValue<bool>		("SaveData");
 	
-    double MET_CUT=40.;
 	int NJET_MAX=6;
 	
     if ( !c1.check() ) return 0;
@@ -83,8 +82,9 @@ int main(int argc, char*argv[])
     TH1 *histJet_pt[3];
     TH1 *histJet_eta[3];
     TH1 *histJet_phi[3];
-    char hist_name[100];
-    
+	char hist_name[100];
+	char hist_title[100];
+	
     //----------------------------------------------------------------------------------------
     TDirectory *jetdir= outf->mkdir("jets");
     jetdir->cd();
@@ -105,9 +105,21 @@ int main(int argc, char*argv[])
     TH1 *histJet_btag 	 = new TH1F("histJet_btag", "Number of B-tagged jets", 10, 0, 10.0);
     TH1 *histJet_btag_pt = new TH1F("histJet_btag_pt", "PT of B-tagged jets", 100, 0.0, 500.0);
     TH1 *histJet_btag_eta = new TH1F("histJet_btag_eta", "ETA of B-tagged jets", 100, -5.0, +5.0);
-    TH1 *histJet_btag_pt_aftercut = new TH1F("histJet_btag_pt_aftercut", "PT of B-tagged jets after the cut", 100, 0.0, 500.0);
-    TH1 *histJet_btag_eta_aftercut = new TH1F("histJet_btag_eta_aftercut", "ETA of B-tagged jets after the cut", 100, -5.0, +5.0);
-    TH1 *jet_size_cut8   = new TH1F("jet_size_cut8", "Number of Jets with 30<PT GeV", 10, 0, 10.0);
+
+	TH1 *histJet_btag_pt_afterbjet1cut = new TH1F("histJet_btag_pt_afterbjet1cut", "PT of B-tagged jets", 100, 0.0, 500.0);
+	TH1 *histJet_btag_eta_afterbjet1cut = new TH1F("histJet_btag_eta_afterbjet1cut", "ETA of B-tagged jets", 100, -5.0, +5.0);
+
+	
+	int btag[12]={30,35,40,45,50,55,60,65,70,80,90,100};
+	TH1F *histJet_btag_ptbigger[12];
+	for (int i=0; i<12; i++)
+	{
+		sprintf(hist_name,"histJet_btag%i",btag[i]);
+		sprintf(hist_title,"Number of B-tagged jets for PT > %i",btag[i]);
+		histJet_btag_ptbigger[i] = new TH1F(hist_name, hist_title, 10, 0.0, 10.0);
+	}
+
+	TH1 *jet_size_cut8   = new TH1F("jet_size_cut8", "Number of Jets with 30<PT GeV", 10, 0, 10.0);
     TH1 *jet_size_cut9   = new TH1F("jet_size_cut9", "Number of Jets with 15<PT<30 GeV", 10, 0, 10.0);
     TH1 *hist_before_jet_eta = new TH1F("hist_before_jet_eta", "Jet Eta Before cut 9", 100, -5.0, 5.0);
     TH1 *hist_alpha_t	 = new TH1F("hist_alpha_t", "Apha_T PT_2/M12", 100, 0, 5.0);
@@ -256,7 +268,7 @@ int main(int argc, char*argv[])
     int final_counter=0;
 
     //int part_counter=0;
-    int signal_counter=0;
+	//int signal_counter=0;
     int nevents=0;
     int counter_saved=0;
 	int decade = 0;
@@ -292,7 +304,7 @@ int main(int argc, char*argv[])
 		////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////
 
-        if(lep.ID==11 && lep.PT < 23) continue;
+        if(lep.ID==11 && lep.PT < 25) continue;
         if(lep.ID==13 && lep.PT < 35) continue;
         
         
@@ -322,7 +334,7 @@ int main(int argc, char*argv[])
         //////////////////////////////////////////////////////////
 
 		//if ( lep.PT  < 50 && lep.PT > 30 ) continue;
-		if ( lep.PT > 35 ) continue;
+		if ( lep.PT > 45 ) continue;
 
         event_counter3_after_leptonpt55++;
 
@@ -333,12 +345,14 @@ int main(int argc, char*argv[])
         histMET_et->Fill(event.MET);
         histMET_eta->Fill(event.METEta);
         histMET_phi->Fill(event.METPhi);
-        
+		
+		//		double MET_CUT=40;
+		double MET_CUT=55;
         if (event.MET < MET_CUT ) continue;
         event_counter4_after_met++;
         
         ////////////////////////////////////////////////////////////////////
-        //	JET BRANCH
+        //	BTAG FILTER
         ////////////////////////////////////////////////////////////////////
         
         double alpha_t=0;
@@ -349,33 +363,43 @@ int main(int argc, char*argv[])
         
         // go to the end of the loop for alpha_t>0.5,
         // because we assume these are qcd events
-        if( alpha_t > 0.4 ) continue;
+		//if( alpha_t > 0.4 ) continue;
         event_counter4_after_alpha_t++;
-        
-        JET this_bjet;
-        
+		
         int counter_btag=0;
-        
-        // filter bjet tagged events
-        for (int i=0; i<NJET_MAX; i++)
-        {
-            if (jet[i].PT > 30 && jet[i].BTag==1)
-            {
-                    histJet_btag_pt->Fill(jet[i].PT);
-                    histJet_btag_eta->Fill(jet[i].Eta);
-                    counter_btag++;
-                    this_bjet=jet[i];
-            }
-            histJet_btag->Fill(counter_btag);
+		for (int j=0; j<12; j++)
+		{
+			counter_btag=0;
+			// filter bjet tagged events
+			for (int i=0; i<NJET_MAX; i++)
+			{
+				if( jet[i].PT > btag[j] && jet[i].BTag==1 ) counter_btag++;
+			}
+			histJet_btag_ptbigger[j]->Fill(counter_btag);
         }
-        
+		counter_btag=0;
+		
+		JET this_bjet;
+		for (int i=0; i<NJET_MAX; i++)
+		{
+			if( jet[i].PT > 50 && jet[i].BTag==1 )
+			{
+				histJet_btag_pt->Fill(jet[i].PT);
+				histJet_btag_eta->Fill(jet[i].Eta);
+				counter_btag++;
+				this_bjet=jet[i];
+			}
+		}
+		histJet_btag->Fill(counter_btag);
+
 		if ( counter_btag != 1 ) continue;
-		if ( this_bjet.PT < 50 ) continue;
+		
+		histJet_btag_pt_afterbjet1cut->Fill(this_bjet.PT);
+		histJet_btag_eta_afterbjet1cut->Fill(this_bjet.Eta);
+
+		
+		//if ( this_bjet.PT <30 || this_bjet.PT >70  ) continue;
         event_counter5_after_btag++;
-        
-        histJet_btag_pt_aftercut->Fill(this_bjet.PT);
-        histJet_btag_eta_aftercut->Fill(this_bjet.Eta);
-        
         
         
         //////////////////////////////////////////////////////////////////////////////////////
@@ -415,7 +439,7 @@ int main(int argc, char*argv[])
 			
         hist_top_inv_mass_mhc->Fill(top_inv_mass_mhc);
 		
-        if ( top_inv_mass_mhc < 220  ) continue;
+        if ( top_inv_mass_mhc < 230  ) continue;
         event_counter6_after_topinvmass++;
 
 		//////////////////////////////////////////////////////////////////////////////////////
@@ -425,7 +449,7 @@ int main(int argc, char*argv[])
 		double leptoninvariantmass=lepton_invariant_mass(&lep, &event);
 		lepton_invmass->Fill(leptoninvariantmass);
 
-        if ( leptoninvariantmass > 60  ) continue;
+        if ( leptoninvariantmass > 65  ) continue;
         event_counter7_after_leptinvmass++;
         
 		//////////////////////////////////////////////////////////////////////////////////////
@@ -487,7 +511,7 @@ int main(int argc, char*argv[])
     TVectorD *crossdata = (TVectorD*)inf->Get("cross");
     TVectorD *effdata   = (TVectorD*)inf->Get("eff");
     
-	double test=(*crossdata)[0];
+	//double test=(*crossdata)[0];
 
 	outf->cd();
 	TVectorD cross1(1);

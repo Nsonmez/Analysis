@@ -35,6 +35,7 @@ using namespace std;
 
 #include "superimpose.h"
 //int main(int argc, char*argv[])
+
 int main()
 {
     gStyle->SetOptStat("n");
@@ -58,6 +59,13 @@ int main()
 	cout << "__________________________________________"<<endl;
 
 
+	double scale[number_of_datasets];
+	for (int a=0;a<number_of_datasets;a++)
+	{
+		double eff_lumi=(double)nevents[a]/(cross_sections[a]);
+		scale[a]=1.0/eff_lumi;
+	}
+	
 	//______________________________________________________________
 	// get the lepton
 
@@ -173,7 +181,6 @@ int main()
     bool comparison_for_jetsize=false;
     bool comparison_for_bjet_lepton=true;
 	
-	
 	//______________________________________________________________________
 	// LEPTON spectrum for background and the signal
 
@@ -189,34 +196,37 @@ int main()
         
         for (int a=0;a<4;a++)
         {
-            double scale= (1.0/gen_lepton[a]->GetEntries())*cross_sections[a]/total_cross_s;
-            gen_lepton[a]->Scale( scale );
+            gen_lepton[a]->Scale( scale[a] );
             gen_lepton_numb_sig->Add(gen_lepton[a]);
         }
+		gen_lepton_numb_sig->Scale(gen_lepton_numb_sig->GetEntries());
         for (int a=0;a<4;a++)
         {
-            double scale= (1.0/lepton_numb_before_trig[a]->GetEntries())*cross_sections[a]/total_cross_s;
-            lepton_numb_before_trig[a]->Scale( scale );
+            lepton_numb_before_trig[a]->Scale( scale[a] );
             lepton_before_trig_sig->Add(lepton_numb_before_trig[a]);
         }
+		lepton_before_trig_sig->Scale(lepton_before_trig_sig->GetEntries());
+
         for (int a=0;a<4;a++)
         {
-            double scale= (1.0/lepton_numb_pass_trig[a]->GetEntries())*cross_sections[a]/total_cross_s;
-            lepton_numb_pass_trig[a]->Scale( scale );
+            lepton_numb_pass_trig[a]->Scale( scale[a] );
             lepton_pass_trig_sig->Add(lepton_numb_pass_trig[a]);
         }
+		lepton_pass_trig_sig->Scale(lepton_pass_trig_sig->GetEntries());
+
         for (int a=0;a<4;a++)
         {
-            double scale= (1.0/lepton_before_hardphot[a]->GetEntries())*cross_sections[a]/total_cross_s;
-            lepton_before_hardphot[a]->Scale( scale );
+            lepton_before_hardphot[a]->Scale( scale[a] );
             lepton_before_hardphot_sig->Add(lepton_before_hardphot[a]);
         }
+		lepton_before_hardphot_sig->Scale(lepton_before_hardphot_sig->GetEntries());
+
         for (int a=0;a<4;a++)
         {
-            double scale= (1.0/lepton_numb_before_10gev[a]->GetEntries())*cross_sections[a]/total_cross_s;
-            lepton_numb_before_10gev[a]->Scale( scale );
+            lepton_numb_before_10gev[a]->Scale( scale[a] );
             lepton_before_10gev_sig->Add(lepton_numb_before_10gev[a]);
         }
+		lepton_before_10gev_sig->Scale(lepton_before_10gev_sig->GetEntries());
 
         TCanvas *canvas0b = new TCanvas("name0abcd","gen_lepton_numb_diff1",0,0,600,500);
 
@@ -411,27 +421,18 @@ int main()
 		// analysis over the signal
 		for (int a=0;a<4;a++)
 		{
-			double eff_lumi=(double)nevents[a]/(cross_sections[a]);
-            double scale= (1.0/eff_lumi);
-            //double scale= (1.0/lepton_pt[a]->GetEntries()*cross_sections[a]/total_cross_s  );
-
-			lepton_pt[a]->Scale( scale );
+			lepton_pt[a]->Scale( scale[a] );
 			lepton_pt_sig->Add(lepton_pt[a]);
 		}
-        
-        lepton_pt_sig->Scale(1.0/lepton_pt_sig->Integral());
+		lepton_pt_sig->Scale(1.0/lepton_pt_sig->Integral());
 		
 		for (int a=4;a<number_of_datasets;a++)
 		{
 			if (lepton_pt[a]->GetEntries()==0)continue;
-            double eff_lumi=(double)nevents[a]/cross_sections[a];
-            double scale= (1.0/eff_lumi);
-            //double scale= (1.0/lepton_pt[a]->GetEntries()*cross_sections[a]/total_cross_b  );
-
-			lepton_pt[a]->Scale( scale );
+			lepton_pt[a]->Scale( scale[a] );
 			lepton_pt_back->Add(lepton_pt[a]);
 		}
-        lepton_pt_back->Scale(1.0/lepton_pt_back->Integral());
+		lepton_pt_back->Scale(1.0/lepton_pt_back->Integral());
 
 		TCanvas *canvas5a = new TCanvas("name5a","title",2500,0,600,500);
 		lepton_pt_sig->GetYaxis()->SetRangeUser(0,0.30);
@@ -472,11 +473,10 @@ int main()
 
         for (int a=0;a<4;a++)
         {
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[2]);
-            double scale= (1.0/met_pt[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
+			//double local_eff=((*effdata[a])[0])*((*effdata[a])[2]);
+			//double scale= (1.0/met_pt[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
             //double scale=(1.0/met_pt[a]->GetEntries())*cross_sections[a]/total_cross_s;
-
-            met_pt[a]->Scale( scale );
+            met_pt[a]->Scale( scale[a] );
             signal_met->Add(met_pt[a]);
         }
         signal_met->Scale(1.0/signal_met->Integral());
@@ -484,10 +484,7 @@ int main()
         for (int a=4;a<number_of_datasets;a++)
         {
             if (met_pt[a]->GetEntries()==0)continue;
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[2]);
-            double scale= (1.0/met_pt[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-            //double scale=(1.0/met_pt[a]->GetEntries())*cross_sections[a]/total_cross_b;
-            met_pt[a]->Scale( scale );
+            met_pt[a]->Scale( scale[a] );
             back_met->Add(met_pt[a]);
         }
         back_met->Scale(1.0/back_met->Integral());
@@ -533,20 +530,19 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[3]);
-			double scale= (1.0/alpha_t[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			alpha_t[a]->Scale( scale );
+			alpha_t[a]->Scale( scale[a] );
 			alpha_t_sig->Add(alpha_t[a]);
 		}
+		alpha_t_sig->Scale(1.0/alpha_t_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
             if (alpha_t[a]->GetEntries()==0)continue;
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[3]);
-			double scale= (1.0/alpha_t[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			alpha_t[a]->Scale( scale );
+			alpha_t[a]->Scale( scale[a] );
 			alpha_t_back->Add(alpha_t[a]);
 		}
-		
+		alpha_t_back->Scale(1.0/alpha_t_back->Integral());
+
 		TCanvas *canvas4b = new TCanvas("name4b","title",2500,0,600,500);
 //		alpha_t_sig->Rebin(5);
 //		alpha_t_back->Rebin(5);
@@ -588,19 +584,20 @@ int main()
 		// analysis over the signal
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[4]);
-			double scale= (1.0/jet_btag_pt[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_btag_pt[a]->Scale( scale );
+			jet_btag_pt[a]->Scale( scale[a] );
 			btag_pt_sig->Add(jet_btag_pt[a]);
 		}
+		btag_pt_sig->Scale(1.0/btag_pt_sig->Integral());
+
+		
 		for (int a=4;a<number_of_datasets;a++)
 		{
             if (jet_btag_pt[a]->GetEntries()==0)continue;
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[4]);
-            double scale= (1.0/jet_btag_pt[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			jet_btag_pt[a]->Scale( scale );
+			jet_btag_pt[a]->Scale( scale[a] );
 			btag_pt_back->Add(jet_btag_pt[a]);
 		}
+		btag_pt_back->Scale(1.0/btag_pt_back->Integral());
+
 		TCanvas *canvas6a = new TCanvas("name6a","title",2500,0,600,500);
 		btag_pt_sig->GetYaxis()->SetRangeUser(0.00001,0.15);
 		btag_pt_back->GetYaxis()->SetRangeUser(0.00001,0.15);
@@ -628,21 +625,17 @@ int main()
 		// analysis over the signal
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[4]);
-			double scale= (1.0/jet_btag[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_btag[a]->Scale( scale );
+			jet_btag[a]->Scale( scale[a] );
 			btag_numb_sig->Add(jet_btag[a]);
-            //btag_numb_sig->Scale( 1.0/jet_btag[a]->Integral() );
 		}
+		btag_numb_sig->Scale(1.0/btag_numb_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[4]);
-            if (jet_btag[a]->GetEntries()==0)continue;
-            double scale= (1.0/jet_btag[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			jet_btag[a]->Scale( scale );
+			jet_btag[a]->Scale( scale[a] );
 			btag_numb_back->Add(jet_btag[a]);
-            //btag_numb_back->Scale( 1.0/jet_btag[a]->Integral() );
 		}
+		btag_numb_back->Scale(1.0/btag_numb_back->Integral());
 
 		TCanvas *canvas7a = new TCanvas("name7a","title",2500,0,600,500);
 		btag_numb_sig->GetYaxis()->SetRangeUser(0.00001,1);
@@ -675,20 +668,18 @@ int main()
 		// analysis over the signal
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[4]);
-			double scale= (1.0/jet_btag_eta[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_btag_eta[a]->Scale( scale );
+			jet_btag_eta[a]->Scale( scale[a] );
 			btag_eta_sig->Add(jet_btag_eta[a]);
 		}
+		btag_eta_sig->Scale(1.0/btag_eta_sig->Integral());
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[4]);
             if (jet_btag_eta[a]->GetEntries()==0)continue;
-            double scale= (1.0/jet_btag_eta[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			jet_btag_eta[a]->Scale( scale );
+			jet_btag_eta[a]->Scale( scale[a] );
 			btag_eta_back->Add(jet_btag_eta[a]);
 		}
-		
+		btag_eta_back->Scale(1.0/btag_eta_back->Integral());
+	
 		TCanvas *canvas7b = new TCanvas("name7b","title",2500,0,600,500);
 		btag_eta_sig->GetYaxis()->SetRangeUser(0.0,0.1);
 		btag_eta_back->GetYaxis()->SetRangeUser(0.0,0.1);
@@ -731,20 +722,19 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[5]);
-			double scale= (1.0/bjet_lepton_dR[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			bjet_lepton_dR[a]->Scale( scale );
+			bjet_lepton_dR[a]->Scale( scale[a] );
 			bjet_lepton_dR_sig->Add(bjet_lepton_dR[a]);
 		}
-		
+		bjet_lepton_dR_sig->Scale(1.0/bjet_lepton_dR_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[5]);
 			if (bjet_lepton_dR[a]->GetEntries()==0)continue;
-			double scale= (1.0/bjet_lepton_dR[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			bjet_lepton_dR[a]->Scale( scale );
+			bjet_lepton_dR[a]->Scale( scale[a] );
 			bjet_lepton_dR_back->Add(bjet_lepton_dR[a]);
 		}
+		bjet_lepton_dR_back->Scale(1.0/bjet_lepton_dR_back->Integral());
+
 		canvasBjet0->cd(1);
 		//        bjet_lepton_dR_sig ->GetYaxis()->SetRangeUser(0.00001,1);
 		//        bjet_lepton_dR_sig ->GetXaxis()->SetRangeUser(0,6);
@@ -771,21 +761,19 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[5]);
-			double scale= (1.0/bjet_lepton_dEta[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			bjet_lepton_dEta[a]->Scale( scale );
+			bjet_lepton_dEta[a]->Scale( scale[a] );
 			bjet_lepton_dEta_sig->Add(bjet_lepton_dEta[a]);
 		}
-		
+		bjet_lepton_dEta_sig->Scale(1.0/bjet_lepton_dEta_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[5]);
 			if (bjet_lepton_dR[a]->GetEntries()==0)continue;
-			double scale= (1.0/bjet_lepton_dEta[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			bjet_lepton_dEta[a]->Scale( scale );
+			bjet_lepton_dEta[a]->Scale( scale[a] );
 			bjet_lepton_dEta_back->Add(bjet_lepton_dEta[a]);
 		}
-		
+		bjet_lepton_dEta_back->Scale(1.0/bjet_lepton_dEta_back->Integral());
+
 		canvasBjet0->cd(1);
 		//        bjet_lepton_dR_sig ->GetYaxis()->SetRangeUser(0.00001,1);
 		//        bjet_lepton_dR_sig ->GetXaxis()->SetRangeUser(0,6);
@@ -819,21 +807,20 @@ int main()
 		// analysis over the signal
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[6]);
 			if (top_invmass[a]->GetEntries()==0) continue;
-			double scale= (1.0/top_invmass[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			top_invmass[a]->Scale( scale );
+			top_invmass[a]->Scale( scale[a] );
 			top_invmass_sig->Add(top_invmass[a]);
 		}
-		
+		top_invmass_sig->Scale(1.0/top_invmass_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[6]);
 			if (top_invmass[a]->GetEntries()==0)continue;
-			double scale= (1.0/top_invmass[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			top_invmass[a]->Scale( scale );
+			top_invmass[a]->Scale( scale[a] );
 			top_invmass_back->Add(top_invmass[a]);
 		}
+		top_invmass_back->Scale(1.0/top_invmass_back->Integral());
+
 		TCanvas *canvas9a = new TCanvas("name9a","title",2500,0,600,500);
 		top_invmass_sig->GetYaxis()->SetRangeUser(0,0.075);
 		top_invmass_back->GetYaxis()->SetRangeUser(0,0.075);
@@ -855,44 +842,43 @@ int main()
 		sprintf(h_name,"8top_invmass_mhc%i.eps", mhc);
 		canvas9a->Print(h_name);
 		
-		TH1F * met_pz_sig  = new TH1F("met_pz_sig" ,"MET (Pz) Sig;Pz;Relative Occurence",  100, 0, 500);
-		TH1F * met_pz_back = new TH1F("met_pz_back","MET (Pz) Back;Pz;Relative Occurence", 100, 0, 500);
-		// analysis over the signal
-		for (int a=0;a<4;a++)
-		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[6]);
-			if (miss_pz_mhc[a]->GetEntries()==0) continue;
-			double scale= (1.0/miss_pz_mhc[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			miss_pz_mhc[a]->Scale( scale );
-			met_pz_sig->Add(miss_pz_mhc[a]);
-		}
-		for (int a=4;a<number_of_datasets;a++)
-		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[6]);
-			if (miss_pz_mhc[a]->GetEntries()==0)continue;
-			double scale= (1.0/miss_pz_mhc[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			miss_pz_mhc[a]->Scale( scale );
-			met_pz_back->Add(miss_pz_mhc[a]);
-		}
-		
-		TCanvas *canvas10a = new TCanvas("name10a","title",2500,0,600,500);
-		met_pz_sig->GetYaxis()->SetRangeUser(0,0.05);
-		met_pz_back->GetYaxis()->SetRangeUser(0,0.05);
-		met_pz_sig->GetXaxis()->SetRangeUser(0,500);
-		met_pz_back->GetXaxis()->SetRangeUser(0,500);
-		met_pz_sig->SetLineColor(2);
-		met_pz_sig->SetLineWidth(3);
-		met_pz_back->SetLineWidth(3);
-		met_pz_sig->Draw();
-		met_pz_back->Draw("same");
-		canvas10a->BuildLegend();
-		//canvas8a->SetLogy();
-		canvas10a->SetLeftMargin(0.127517);
-		canvas10a->SetRightMargin(0.02013423);
-		met_pz_back->SetStats(0);
-		met_pz_sig->SetStats(0);
-		sprintf(h_name,"8met_pz_mhc%i.eps", mhc);
-		canvas10a->Print(h_name);
+//		TH1F * met_pz_sig  = new TH1F("met_pz_sig" ,"MET (Pz) Sig;Pz;Relative Occurence",  100, 0, 500);
+//		TH1F * met_pz_back = new TH1F("met_pz_back","MET (Pz) Back;Pz;Relative Occurence", 100, 0, 500);
+//		// analysis over the signal
+//		for (int a=0;a<4;a++)
+//		{
+//			if (miss_pz_mhc[a]->GetEntries()==0) continue;
+//			miss_pz_mhc[a]->Scale( scale[a] );
+//			met_pz_sig->Add(miss_pz_mhc[a]);
+//		}
+//		met_pz_sig->Scale(1.0/met_pz_sig->Integral());
+//
+//		for (int a=4;a<number_of_datasets;a++)
+//		{
+//			if (miss_pz_mhc[a]->GetEntries()==0)continue;
+//			miss_pz_mhc[a]->Scale( scale[a] );
+//			met_pz_back->Add(miss_pz_mhc[a]);
+//		}
+//		met_pz_back->Scale(1.0/met_pz_back->Integral());
+//
+//		TCanvas *canvas10a = new TCanvas("name10a","title",2500,0,600,500);
+//		met_pz_sig->GetYaxis()->SetRangeUser(0,0.05);
+//		met_pz_back->GetYaxis()->SetRangeUser(0,0.05);
+//		met_pz_sig->GetXaxis()->SetRangeUser(0,500);
+//		met_pz_back->GetXaxis()->SetRangeUser(0,500);
+//		met_pz_sig->SetLineColor(2);
+//		met_pz_sig->SetLineWidth(3);
+//		met_pz_back->SetLineWidth(3);
+//		met_pz_sig->Draw();
+//		met_pz_back->Draw("same");
+//		canvas10a->BuildLegend();
+//		//canvas8a->SetLogy();
+//		canvas10a->SetLeftMargin(0.127517);
+//		canvas10a->SetRightMargin(0.02013423);
+//		met_pz_back->SetStats(0);
+//		met_pz_sig->SetStats(0);
+//		sprintf(h_name,"8met_pz_mhc%i.eps", mhc);
+//		canvas10a->Print(h_name);
 
 		
 
@@ -917,22 +903,20 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[7]);
 			if (lepton_invmass[a]->GetEntries()==0)continue;
-			double scale= (1.0/lepton_invmass[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			lepton_invmass[a]->Scale( scale );
+			lepton_invmass[a]->Scale( scale[a] );
 			lepton_invmass_sig->Add(lepton_invmass[a]);
 		}
-		
+		lepton_invmass_sig->Scale(1.0/lepton_invmass_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[7]);
 			if (lepton_invmass[a]->GetEntries()==0)continue;
-			double scale= (1.0/lepton_invmass[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			lepton_invmass[a]->Scale( scale );
+			lepton_invmass[a]->Scale( scale[a] );
 			lepton_invmass_back->Add(lepton_invmass[a]);
 		}
-		
+		lepton_invmass_back->Scale(1.0/lepton_invmass_back->Integral());
+
 		TCanvas *canvas8a = new TCanvas("name8a","title",2500,0,600,500);
 		lepton_invmass_sig ->GetYaxis()->SetRangeUser(0.00001,0.25);
 		lepton_invmass_back->GetYaxis()->SetRangeUser(0.00001,0.25);
@@ -972,21 +956,19 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[7]);
-			double scale= (1.0/jet_pt0[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_pt0[a]->Scale( scale );
+			jet_pt0[a]->Scale( scale[a] );
 			jet_pt_sig->Add(jet_pt0[a]);
 		}
-		
+		jet_pt_sig->Scale(1.0/jet_pt_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[7]);
             if (jet_pt0[a]->GetEntries()==0|| a==11)continue;
-			double scale= (1.0/jet_pt0[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-            jet_pt0[a]->Scale( scale );
+            jet_pt0[a]->Scale( scale[a] );
 			jet_pt_back->Add(jet_pt0[a]);
 		}
-		
+		jet_pt_back->Scale(1.0/jet_pt_back->Integral());
+
 		TCanvas *canvas10c = new TCanvas("name10c","title",0,0,600,500);
 		jet_pt_sig ->GetYaxis()->SetRangeUser(0.00001,1);
 		jet_pt_back->GetYaxis()->SetRangeUser(0.00001,1);
@@ -1018,21 +1000,19 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[7]);
-			double scale= (1.0/jet_eta0[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_eta0[a]->Scale( scale );
+			jet_eta0[a]->Scale( scale[a] );
 			jet_eta_sig->Add(jet_eta0[a]);
 		}
-		
+		jet_eta_sig->Scale(1.0/jet_eta_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[7]);
             if (jet_eta0[a]->GetEntries()==0 || a==11)continue;
-			double scale= (1.0/jet_eta0[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-            jet_eta0[a]->Scale( scale );
+            jet_eta0[a]->Scale( scale[a] );
 			jet_eta_back->Add(jet_eta0[a]);
 		}
-		
+		jet_eta_back->Scale(1.0/jet_eta_back->Integral());
+
 		TCanvas *canvas11c = new TCanvas("name11c","title",0,0,600,500);
 		jet_eta_sig ->GetYaxis()->SetRangeUser(0.00001,0.05);
 		jet_eta_back->GetYaxis()->SetRangeUser(0.00001,0.05);
@@ -1065,21 +1045,19 @@ int main()
 		
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[8]);
-			double scale= (1.0/jet_size_cut8[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_size_cut8[a]->Scale( scale );
+			jet_size_cut8[a]->Scale( scale[a] );
 			jet_size_cut8_sig->Add(jet_size_cut8[a]);
 		}
-		
+		jet_size_cut8_sig->Scale(1.0/jet_size_cut8_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[8]);
 			if (jet_size_cut8[a]->GetEntries()==0)continue;
-			double scale= (1.0/jet_size_cut8[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			jet_size_cut8[a]->Scale( scale );
+			jet_size_cut8[a]->Scale( scale[a] );
 			jet_size_cut8_back->Add(jet_size_cut8[a]);
 		}
-		
+		jet_size_cut8_back->Scale(1.0/jet_size_cut8_back->Integral());
+
 		TCanvas *canvas8a = new TCanvas("name8b","title",2500,0,600,500);
 		jet_size_cut8_sig ->GetYaxis()->SetRangeUser(0.00001,1);
 		jet_size_cut8_back->GetYaxis()->SetRangeUser(0.00001,1);
@@ -1112,21 +1090,19 @@ int main()
 	
 		for (int a=0;a<4;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[8]);
-			double scale= (1.0/jet_size_cut9[a]->GetEntries())*cross_sections[a]/total_cross_s*local_eff;
-			jet_size_cut9[a]->Scale( scale );
+			jet_size_cut9[a]->Scale( scale[a] );
 			jet_size_cut9_sig->Add(jet_size_cut9[a]);
 		}
-	
+		jet_size_cut9_sig->Scale(1.0/jet_size_cut9_sig->Integral());
+
 		for (int a=4;a<number_of_datasets;a++)
 		{
-			double local_eff=((*effdata[a])[0])*((*effdata[a])[8]);
-				if (jet_size_cut9[a]->GetEntries()==0)continue;
-			double scale= (1.0/jet_size_cut9[a]->GetEntries())*cross_sections[a]/total_cross_b*local_eff;
-			jet_size_cut9[a]->Scale( scale );
+			if (jet_size_cut9[a]->GetEntries()==0)continue;
+			jet_size_cut9[a]->Scale( scale[a] );
 			jet_size_cut9_back->Add(jet_size_cut9[a]);
 		}
-	
+		jet_size_cut9_back->Scale(1.0/jet_size_cut9_back->Integral());
+
 		TCanvas *canvas9a = new TCanvas("name9b","title",2500,0,600,500);
 		jet_size_cut9_sig ->GetYaxis()->SetRangeUser(0.00001,1);
 		jet_size_cut9_back->GetYaxis()->SetRangeUser(0.00001,1);
@@ -1149,57 +1125,6 @@ int main()
 		canvas9a->Print(h_name);
 		
 	}
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-
-    if(comparison_for_jetsize)
-    {
-		cout << " --> comparison_for_jetcut" << endl;
-
-        TH1F * jet_size_cut8_pt35_sig  = new TH1F("jet_size_cut8_pt35_sig" ,"Jet Size before cut-8 Sig;Jet Size;Relative Occurence", 10, 0, 10);
-        TH1F * jet_size_cut8_pt35_back  = new TH1F("jet_size_cut8_pt35_back","Jet Size before cut-8  Back;Jet Size;Relative Occurence", 10, 0, 10);
-        
-        // analysis over the signal
-        
-        for (int a=0;a<4;a++)
-        {
-            double scale= (1.0/jet_size_cut9_50[a]->GetEntries())*cross_sections[a]/total_cross_s;
-            jet_size_cut9_50[a]->Scale( scale );
-            jet_size_cut8_pt35_sig->Add(jet_size_cut9_50[a]);
-        }
-        
-        for (int a=4;a<number_of_datasets;a++)
-        {
-            if (jet_size_cut9_50[a]->GetEntries()==0)continue;
-            double scale= (1.0/jet_size_cut9_50[a]->GetEntries())*cross_sections[a]/total_cross_b;
-            jet_size_cut9_50[a]->Scale( scale );
-            jet_size_cut8_pt35_back->Add(jet_size_cut9_50[a]);
-        }
-
-        TCanvas *canvas_jet = new TCanvas("canvas_jet","title",2500,0,600,500);
-        jet_size_cut8_pt35_sig ->GetYaxis()->SetRangeUser(0.00001,1);
-        jet_size_cut8_pt35_back->GetYaxis()->SetRangeUser(0.00001,1);
-        jet_size_cut8_pt35_sig ->GetXaxis()->SetRangeUser(0,250);
-        jet_size_cut8_pt35_back->GetXaxis()->SetRangeUser(0,250);
-        jet_size_cut8_pt35_sig->SetLineColor(2);
-        jet_size_cut8_pt35_sig->SetLineWidth(3);
-        jet_size_cut8_pt35_back->SetLineWidth(3);
-        jet_size_cut8_pt35_sig->Draw();
-        jet_size_cut8_pt35_sig->SetFillColor(2);
-        jet_size_cut8_pt35_sig->SetFillStyle(3002);
-        jet_size_cut8_pt35_back->Draw("same");
-        canvas_jet->BuildLegend();
-        //canvas8a->SetLogy();
-        canvas_jet->SetLeftMargin(0.127517);
-        canvas_jet->SetRightMargin(0.02013423);
-        jet_size_cut8_pt35_back->SetStats(0);
-        jet_size_cut8_pt35_sig->SetStats(0);
-        sprintf(h_name,"jet_size_cut9_pt50_mhc%i.eps", mhc);
-        canvas_jet->Print(h_name);
-        
-
-    }
 	
 	
 
