@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_wmp2jets"
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "wmp2jets"
+
+CrossSection = 17028.775569156776
+
+Efficiency	= 0.00921;
+
+DATA = false
+
+MH2 = 16900
+
+SaveData = true

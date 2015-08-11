@@ -1,0 +1,22 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName   = "ntuple_list_files/list_singletop_tw_mhc130"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "singletop_tw"
+
+CrossSection = 1.0215979465289249
+
+$$$ nohup_s_mhc130: 5  event after btag = 1    : 6369	0.0220173
+
+Efficiency	=0.02666;
+
+DATA = true
+
+MH2 = 16900
+
+SaveData = true

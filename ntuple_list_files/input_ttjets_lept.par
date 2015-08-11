@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_ttjets_lept"
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "ttjets_lept"
+
+CrossSection = 107.7
+
+Efficiency	= 0.13782;
+
+DATA = false
+
+MH2 = 16900
+
+SaveData = true

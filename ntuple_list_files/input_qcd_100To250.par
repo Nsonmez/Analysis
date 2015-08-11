@@ -1,0 +1,20 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_qcd_HT100_250"
+
+$$$----- Number of Events to Process
+NEntries = 100000
+
+$$$----- Output file name 
+OutputFileName	= "qcd_100To250"
+
+CrossSection = 0.96083416733012073
+
+Efficiency	= 1.0;
+
+MH2 = 10000
+
+SaveData = true
+
+DATA = false

@@ -1,0 +1,14 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_wc3jets"
+
+$$$----- Number of Events to Process
+NEntries = 1000000
+$NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "wc3jets"
+
+
+DATA = false

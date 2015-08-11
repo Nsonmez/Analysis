@@ -252,7 +252,7 @@ int main(int argc, char*argv[])
     //	int mother[500];
     
     int event_counter0_after_trigger=0;
-    int event_counter1_after_hardphoton=0;
+    int event_counter1_after_hardlepton=0;
     int event_counter2_after_10gev=0;
     int event_counter3_after_leptonpt55=0;
     int event_counter4_after_met=0;
@@ -268,10 +268,11 @@ int main(int argc, char*argv[])
 
     //int part_counter=0;
 	//int signal_counter=0;
-    int nevents=0;
+    //int nevents=0;
     int counter_saved=0;
 	int decade = 0;
 
+    
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//___________________________________________________________________________________________________________
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +280,7 @@ int main(int argc, char*argv[])
     // Loop over all events
     for(Long64_t entry = 0; entry < entries; ++entry)
     {
-        nevents++;
+        //nevents++;
 		//progress( entries, entry );
 		double progress = 10.0*entry/(1.0*entries);
 		int k = TMath::FloorNint(progress);
@@ -510,28 +511,31 @@ int main(int argc, char*argv[])
     
     TVectorD *crossdata = (TVectorD*)inf->Get("cross");
     TVectorD *effdata   = (TVectorD*)inf->Get("eff");
+    TVectorD *neve      = (TVectorD*)inf->Get("neve");
     
+    double nevents  =  (*neve)[0];
+
 	//double test=(*crossdata)[0];
 
-	outf->cd();
-	TVectorD cross1(1);
-	cross1[0] = cross;
-	cross1.Write("cross");
-	
-	TVectorD eff1(12);
-	eff1[0]  =  (*effdata)[0];
-	eff1[1]  =  (double)event_counter3_after_leptonpt55/nevents;
-	eff1[2]  =  (double)event_counter4_after_met/nevents;
-	eff1[3]  =  (double)event_counter4_after_alpha_t/nevents;
-	eff1[4]  =  (double)event_counter5_after_btag/nevents;
-	eff1[5]  =  (double)event_counter5a_after_deltaEta/nevents;
-	eff1[6]  =  (double)event_counter6_after_topinvmass/nevents;
-	eff1[7]  =  (double)event_counter7_after_leptinvmass/nevents;
-	eff1[8]  =  (double)event_counter8_after_onejet/nevents;
-	eff1[9]  =  (double)event_counter9_after_onejet/nevents;
-	eff1[10] =  (double)event_counter10_after_jeteta/nevents;
-	eff1[11] =  (double)final_counter/nevents;
-	eff1.Write("eff");
+//	outf->cd();
+//	TVectorD cross1(1);
+//	cross1[0] = cross;
+//	cross1.Write("cross");
+//	
+//	TVectorD eff1(12);
+//	eff1[0]  =  (*effdata)[0];
+//	eff1[1]  =  (double)event_counter3_after_leptonpt55/nevents;
+//	eff1[2]  =  (double)event_counter4_after_met/nevents;
+//	eff1[3]  =  (double)event_counter4_after_alpha_t/nevents;
+//	eff1[4]  =  (double)event_counter5_after_btag/nevents;
+//	eff1[5]  =  (double)event_counter5a_after_deltaEta/nevents;
+//	eff1[6]  =  (double)event_counter6_after_topinvmass/nevents;
+//	eff1[7]  =  (double)event_counter7_after_leptinvmass/nevents;
+//	eff1[8]  =  (double)event_counter8_after_onejet/nevents;
+//	eff1[9]  =  (double)event_counter9_after_onejet/nevents;
+//	eff1[10] =  (double)event_counter10_after_jeteta/nevents;
+//	eff1[11] =  (double)final_counter/nevents;
+//	eff1.Write("eff");
 	
     //---------------------------------------------------------------------------------------------------------
     ////////////////////////////////  Saving the histograms into output  //////////////////////////////////////////
@@ -540,20 +544,20 @@ int main(int argc, char*argv[])
     
     cout << "nevents : " << nevents << endl;
     cout << "_____________________________________________________________________" << endl;
-    cout << " 0  event after trigger     : "    << event_counter0_after_trigger     << "\t" << (double)event_counter0_after_trigger/nevents		<< "\t" << (double)event_counter0_after_trigger/nevents*cross*1000 << endl;
-    cout << " 1  event after hard photon : "    << event_counter1_after_hardphoton  << "\t" << (double)event_counter1_after_hardphoton/nevents  << "\t" << (double)event_counter1_after_hardphoton/nevents*cross*1000 << endl;
-    cout << " 2  event after 10gev       : "    << event_counter2_after_10gev       << "\t" << (double)event_counter2_after_10gev/nevents       << "\t" << (double)event_counter2_after_10gev/nevents*cross*1000 << endl;
-    cout << " 3  event after Lep(PT)>55  : "    << event_counter3_after_leptonpt55  << "\t" << (double)event_counter3_after_leptonpt55/nevents  << "\t" << (double)event_counter3_after_leptonpt55/nevents*cross*1000 << endl;
-    cout << " 4  event after met > 50    : "    << event_counter4_after_met         << "\t" << (double)event_counter4_after_met/nevents         << "\t" << (double)event_counter4_after_met/nevents*cross*1000 << endl;
-    cout << " 4  event after alp_t > 0.5 : "    << event_counter4_after_alpha_t     << "\t" << (double)event_counter4_after_alpha_t/nevents     << "\t" << (double)event_counter4_after_alpha_t/nevents*cross*1000 << endl;
-    cout << " 5  event after btag = 1    : "    << event_counter5_after_btag        << "\t" << (double)event_counter5_after_btag/nevents        << "\t" << (double)event_counter5_after_btag/nevents*cross*1000 << endl;
-    cout << " 5a event after delta Eta   : "    << event_counter5a_after_deltaEta   << "\t" << (double)event_counter5a_after_deltaEta/nevents   << "\t" << (double)event_counter5a_after_deltaEta/nevents*cross*1000 << endl;
-    cout << " 6  event after topinvmass  : "    << event_counter6_after_topinvmass  << "\t" << (double)event_counter6_after_topinvmass/nevents  << "\t" << (double)event_counter6_after_topinvmass/nevents*cross*1000 << endl;
-    cout << " 7  event after leptinvmass : "    << event_counter7_after_leptinvmass << "\t" << (double)event_counter7_after_leptinvmass/nevents << "\t" << (double)event_counter7_after_leptinvmass/nevents*cross*1000 << endl;
-    cout << " 8  event after numb_jet =1 : "    << event_counter8_after_onejet      << "\t" << (double)event_counter8_after_onejet/nevents      << "\t" << (double)event_counter8_after_onejet/nevents*cross*1000 << endl;
-    cout << " 9  event after numb_jet =1 : "    << event_counter9_after_onejet      << "\t" << (double)event_counter9_after_onejet/nevents      << "\t" << (double)event_counter9_after_onejet/nevents*cross*1000 << endl;
-    cout << " 10 event after jet_eta>2.5 : "    << event_counter10_after_jeteta     << "\t" << (double)event_counter10_after_jeteta/nevents     << "\t" << (double)event_counter10_after_jeteta/nevents*cross*1000 << endl;
-    cout << " 10 final counter           : "    << final_counter     << "\t" << (double)final_counter/nevents     << endl;
+    cout << " 0  event after trigger     : "    << event_counter0_after_trigger     << "\t" << (double)event_counter0_after_trigger/nevents		<< "\t" << (double)event_counter0_after_trigger/nevents*cross*1000      << endl;
+    cout << " 1  event after hard lepton : "    << event_counter1_after_hardlepton  << "\t" << (double)event_counter1_after_hardlepton/nevents  << "\t" << (double)event_counter1_after_hardlepton/nevents*cross*1000   << endl;
+    cout << " 2  event after 10gev       : "    << event_counter2_after_10gev       << "\t" << (double)event_counter2_after_10gev/nevents       << "\t" << (double)event_counter2_after_10gev/nevents*cross*1000        << endl;
+    cout << " 3  event after Lep(PT)>55  : "    << event_counter3_after_leptonpt55  << "\t" << (double)event_counter3_after_leptonpt55/nevents  << "\t" << (double)event_counter3_after_leptonpt55/nevents*cross*1000   << endl;
+    cout << " 4  event after met > 50    : "    << event_counter4_after_met         << "\t" << (double)event_counter4_after_met/nevents         << "\t" << (double)event_counter4_after_met/nevents*cross*1000          << endl;
+    cout << " 4  event after alp_t > 0.5 : "    << event_counter4_after_alpha_t     << "\t" << (double)event_counter4_after_alpha_t/nevents     << "\t" << (double)event_counter4_after_alpha_t/nevents*cross*1000      << endl;
+    cout << " 5  event after btag = 1    : "    << event_counter5_after_btag        << "\t" << (double)event_counter5_after_btag/nevents        << "\t" << (double)event_counter5_after_btag/nevents*cross*1000         << endl;
+    cout << " 5a event after delta Eta   : "    << event_counter5a_after_deltaEta   << "\t" << (double)event_counter5a_after_deltaEta/nevents   << "\t" << (double)event_counter5a_after_deltaEta/nevents*cross*1000    << endl;
+    cout << " 6  event after topinvmass  : "    << event_counter6_after_topinvmass  << "\t" << (double)event_counter6_after_topinvmass/nevents  << "\t" << (double)event_counter6_after_topinvmass/nevents*cross*1000   << endl;
+    cout << " 7  event after leptinvmass : "    << event_counter7_after_leptinvmass << "\t" << (double)event_counter7_after_leptinvmass/nevents << "\t" << (double)event_counter7_after_leptinvmass/nevents*cross*1000  << endl;
+    cout << " 8  event after numb_jet =1 : "    << event_counter8_after_onejet      << "\t" << (double)event_counter8_after_onejet/nevents      << "\t" << (double)event_counter8_after_onejet/nevents*cross*1000       << endl;
+    cout << " 9  event after numb_jet =1 : "    << event_counter9_after_onejet      << "\t" << (double)event_counter9_after_onejet/nevents      << "\t" << (double)event_counter9_after_onejet/nevents*cross*1000       << endl;
+    cout << " 10 event after jet_eta>2.5 : "    << event_counter10_after_jeteta     << "\t" << (double)event_counter10_after_jeteta/nevents     << "\t" << (double)event_counter10_after_jeteta/nevents*cross*1000      << endl;
+    cout << " 10 final counter           : "    << final_counter                    << "\t" << (double)final_counter/nevents                    << endl;
 
     cout << "_____________________________________________________________________" << endl;
 	cout << " ntuple create eff : "<< (*effdata)[0];

@@ -34,54 +34,6 @@
 
 #include "skimming_events.h"
 
-
-typedef struct
-{
-	//	double PVz;
-	//	double PVx;
-	//	double PVy;
-	double cross;
-	double eff;
-} SAMPLE;
-
-typedef struct
-{
-//	double PVz;
-//	double PVx;
-//	double PVy;
-	double HT;
-	double MET;
-	double METEta;
-	double METPhi;
-} EVENT_VAR;
-
-
-
-typedef struct
-{
-	double PT;
-	double Eta;
-	double Phi;
-	double Mass;
-	double DeltaEta;
-	double DeltaPhi;
-	int Charge;
-	int BTag;
-	int TauTag;
-} JET;
-
-
-typedef struct
-{
-	double	PT;
-	double  Eta;
-	double  Phi;
-	int Charge;
-	int ID;
-	//double  Particle;
-} LEPTON;
-
-
 using namespace std;
 
 //----------------------------------------------------------------------------------------
@@ -230,12 +182,16 @@ int main(int argc, char*argv[])
 	Muon *this_muon=0; //, *mu2, *mu3;
 	GenParticle *partm, *partp, *motherm, *motherp, *mother2, *mother3;
 	
-	
-	
+    int event_counter0_after_trigger=0;
+    int event_counter1_after_hardlepton=0;
+    int event_counter2_after_10gev=0;
 	int signal_counter=0;
 	int counter_saved=0;
 	
-	// Loop over all events
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Loop over all events
 	for(Long64_t entry = 0; entry < entries; ++entry)
 	{
 		
@@ -347,12 +303,42 @@ int main(int argc, char*argv[])
         // TRIGGER EMULATION
         //////////////////////////////////////////
 		
+        
         //filter lepton=1 events
         int numb_elec_pass_cuts=0;
         int numb_muon_pass_cuts=0;
         
+        
         if( branchElectron->GetEntries() > 0)
         {
+            for(int i=0; i<branchElectron->GetEntries(); i++)
+            {
+                elec[i] = (Electron *) branchElectron->At(i);
+                if(  (elec[i]->PT)>25 ) numb_elec_pass_cuts++;
+            }
+        }
+        
+        if( branchMuon->GetEntries() > 0)
+        {
+            for(int i=0; i<branchMuon->GetEntries(); i++)
+            {
+                mu[i] = (Muon *) branchMuon->At(i);
+                if(  (mu[i]->PT)>20) numb_muon_pass_cuts++;
+            }
+        }
+        
+        if ( (numb_muon_pass_cuts + numb_elec_pass_cuts)==0 ) continue;
+        
+        event_counter0_after_trigger++;
+
+        //////////////////////////////////////////
+        // HARD LEPTONs at THE CENTRAL REGION
+        //////////////////////////////////////////
+
+        
+        if( branchElectron->GetEntries() > 0)
+        {
+            numb_elec_pass_cuts=0;
             for(int i=0; i<branchElectron->GetEntries(); i++)
             {
                 elec[i] = (Electron *) branchElectron->At(i);
@@ -366,6 +352,7 @@ int main(int argc, char*argv[])
         
         if( branchMuon->GetEntries() > 0)
         {
+            numb_muon_pass_cuts=0;
             for(int i=0; i<branchMuon->GetEntries(); i++)
             {
                 mu[i] = (Muon *) branchMuon->At(i);
@@ -380,12 +367,14 @@ int main(int argc, char*argv[])
         // if the total number of muons is higher than 0 fire for this event
         if ( (numb_muon_pass_cuts + numb_elec_pass_cuts)==0 ) continue;
 
+        event_counter1_after_hardlepton++;
+
         // will reuse these constants so set them to 0
         int numb_softmuon_pass_cuts=0;
         int numb_softelec_pass_cuts=0;
         
         //////////////////////////////////////////
-        // NUMBER OF LEPTONS PT > 10 GeV
+        // SECONDARY SOFT LEPTONS WITH PT > 10 GeV
         //////////////////////////////////////////
         
         if( branchElectron->GetEntries() > 0)
@@ -412,23 +401,12 @@ int main(int argc, char*argv[])
         
         if ((numb_softmuon_pass_cuts + numb_softelec_pass_cuts)!=1) continue;
 		
+        event_counter2_after_10gev++;
+        
 		if ( branchJet-> GetEntries() == 0 ) continue;
 
 		EVENT_VAR event;
-	
-//		if ( branchVertex-> GetEntries() > 0)
-//		{
-//			Vertex * vert = (Vertex *) branchVertex->At(0);
-//			event.PVz=vert->Z;
-//			event.PVx=vert->X;
-//			event.PVy=vert->Y;
-//		}
-//		else {
-//			event.PVz=-999;
-//			event.PVx=-999;
-//			event.PVy=-999;
-//		}
-		
+
 		if ( branchScalarHT-> GetEntries() > 0)
 		{
 			ScalarHT * scalarht = (ScalarHT *) branchScalarHT->At(0);
@@ -545,29 +523,25 @@ int main(int argc, char*argv[])
 		counter_saved++;
 		
 	}	//end of event loop
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	TVectorD cross1(1);
-	cross1[0] = cross;
-	cross1.Write("cross");
-
-	TVectorD eff1(1);
-	eff1[0] = (double)counter_saved/entries;
-	eff1.Write("eff");
-
+    TVectorD cross1(1);
+    cross1[0] = cross;
+    cross1.Write("cross");
+    
+    TVectorD eff1(1);
+    eff1[0] = (double)counter_saved/entries;
+    eff1.Write("eff");
+    
     TVectorD neve(1);
     neve[0] = entries;
     neve.Write("neve");
-
-	// how to retrieve TDVector
-	//	root > TVectorD *v = (TVectorD*)f.get("v");
-	//	root > v->Print();
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
+    
 	//---------------------------------------------------------------------------------------------------------
-	////////////////////////////////  Saving the histograms into output  //////////////////////////////////////////
+	////////////////////////////////  Saving the histograms into output  //////////////////////////////////////
 	//---------------------------------------------------------------------------------------------------------
 	// end of event loop
 	cout << "_____________________________________________"<< endl;
@@ -577,7 +551,12 @@ int main(int argc, char*argv[])
 	cout << "counter_saved  : ";
  	cout.width(10);
 	cout << counter_saved << "  %  " << (double)counter_saved/entries << endl;
-	cout << "_____________________________________________"<< endl;
+    cout << "_____________________________________________________________________" << endl;
+    cout << " 0  event after trigger     : "    << event_counter0_after_trigger     << "\t" << (double)event_counter0_after_trigger/entries		<< "\t" << (double)event_counter0_after_trigger/entries*cross*1000      << endl;
+    cout << " 1  event after hard lepton : "    << event_counter1_after_hardlepton  << "\t" << (double)event_counter1_after_hardlepton/entries  << "\t" << (double)event_counter1_after_hardlepton/entries*cross*1000   << endl;
+    cout << " 2  event after 10gev       : "    << event_counter2_after_10gev       << "\t" << (double)event_counter2_after_10gev/entries       << "\t" << (double)event_counter2_after_10gev/entries*cross*1000        << endl;
+
+    cout << "_____________________________________________"<< endl;
 
 
 	

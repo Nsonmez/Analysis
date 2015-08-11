@@ -26,6 +26,54 @@ typedef struct
     double alpha_t;
 } MyEVENT;
 
+typedef struct
+{
+    //	double PVz;
+    //	double PVx;
+    //	double PVy;
+    double cross;
+    double eff;
+} SAMPLE;
+
+typedef struct
+{
+    //	double PVz;
+    //	double PVx;
+    //	double PVy;
+    double HT;
+    double MET;
+    double METEta;
+    double METPhi;
+} EVENT_VAR;
+
+
+
+typedef struct
+{
+    double PT;
+    double Eta;
+    double Phi;
+    double Mass;
+    double DeltaEta;
+    double DeltaPhi;
+    int Charge;
+    int BTag;
+    int TauTag;
+} JET;
+
+
+typedef struct
+{
+    double	PT;
+    double  Eta;
+    double  Phi;
+    int Charge;
+    int ID;
+    //double  Particle;
+} LEPTON;
+
+
+
 
 double lepton_invariant_massv2(Jet *bjet, Electron *ptlep, MissingET *miss, double MH2)
 {

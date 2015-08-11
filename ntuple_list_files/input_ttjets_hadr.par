@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_ttjets_hadr"
+
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "ttjets_hadr"
+
+CrossSection = 562.7
+
+Efficiency	= 0.0;
+
+DATA = false
+
+MH2 = 16900
+
+SaveData = true

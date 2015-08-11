@@ -1,0 +1,22 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_ttjets_semilept"
+
+
+$$$----- Number of Events to Process
+$NEntries = -1
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "ttjets_semilept"
+
+CrossSection = 364.7
+
+Efficiency	= 0.13014;
+
+DATA = false
+
+MH2 = 16900
+
+SaveData = true

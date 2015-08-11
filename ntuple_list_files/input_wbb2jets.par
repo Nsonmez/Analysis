@@ -1,0 +1,20 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_wbb2jets"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "wbb2jets"
+
+CrossSection = 168.06193240935943
+
+Efficiency	= 0.03839;
+
+DATA = false
+
+MH2 = 16900
+
+SaveData = true

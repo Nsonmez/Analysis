@@ -1,0 +1,21 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName	= "ntuple_list_files/list_back_singletop_t3"
+
+$$$----- Number of Events to Process
+$NEntries = 1000000
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "back_singletop_t3"
+
+CrossSection = 153.13877227715599
+
+Efficiency	= 0.0371;
+
+DATA = false
+
+MH2 = 16900
+
+SaveData = true

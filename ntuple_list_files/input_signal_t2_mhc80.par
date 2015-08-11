@@ -1,0 +1,20 @@
+$$$----- Minimal configuration file to run on data -----
+$$$----- Input file name 
+
+InputFileName   = "ntuple_list_files/list_singletop_t2_mhc80"
+
+$$$----- Number of Events to Process
+NEntries = -1
+
+$$$----- Output file name 
+OutputFileName	= "singletop_t2"
+
+CrossSection = 13.099884673714966
+
+Efficiency	= 0.0118457;
+
+DATA = true
+
+MH2 = 6400
+
+SaveData = true

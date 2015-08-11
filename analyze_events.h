@@ -57,6 +57,42 @@ typedef struct
 } LEPTON;
 
 
+//Matched cross section
+const double nevents[] =
+{
+    
+    //mhc100 icin degerler
+    1000000*0.36,					// singletop_s
+    1000000*0.36,	// singletop_s
+    1000000*0.36,	// singletop_s
+    1000000*0.36,	// singletop_s
+    
+    
+    1000000,		//back_singletop_s
+    1099999,		//back_singletop_t2
+    1000000,		//back_singletop_t3
+    1100000,		//back_singletop_tw
+    
+    845786,					// ttjets_lept
+    853378,					// ttjets_semilept
+    852616,					// ttjets_hadr
+    
+    30400000,		// wmp0jets
+    3775793,		// wmp1jets
+    2142360,    	// wmp2jets
+    //5800.3387351386527,   // wmp3jets
+    
+    3006604,		// wc0jets
+    1636475,		// wc1jets
+    1247244,    	// wc2jets
+    //1622.8438854931915,   // wc3jets
+    
+    1000000,		// wbb0jets
+    1164558,		// wbb1jets
+    664725,    	// wbb2jets
+    //114.9			    	// wbb3jets
+};
+
 
 
 //void progress(int entries,  int i );
