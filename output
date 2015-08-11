@@ -1,4 +1,4 @@
-g++ -g -O3 -fPIC -ansi -Wall  -pthread -stdlib=libc++ -m64 -I/Users/nsonmez/root/include -I/Users/nsonmez/Delphes-3.1.2/external/fastjet/plugins/ATLASCone  -g  analyze_events.cpp   -g -L/Users/nsonmez/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lpthread -Wl,-rpath,/Users/nsonmez/root/lib -stdlib=libc++ -lm -ldl  -lExRootAnalysis -o analyze_events
+make: `analyze_events' is up to date.
 ------------------------------------------------------------
 ./analyze_events options:
 ------------------------------------------------------------
@@ -14,43 +14,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:53
+22:42:48
 Set Branch Addresses
 Reading TREE: 66753 events available, 
 		-1 of them will be analyzed.
-18:29:53
+22:42:48
 10%	
-18:29:53
+22:42:48
 20%	
-18:29:53
+22:42:48
 30%	
-18:29:53
+22:42:48
 40%	
-18:29:53
+22:42:48
 50%	
-18:29:53
+22:42:48
 60%	
-18:29:53
+22:42:48
 70%	
-18:29:53
+22:42:48
 80%	
-18:29:53
+22:42:48
 90%	
 nevents : 66753
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 21611	0.323746
- 4  event after met > 50    : 7971	0.11941
- 4  event after alp_t > 0.5 : 7971	0.11941
- 5  event after btag = 1    : 2167	0.032463
- 5a event after delta Eta   : 1828	0.0273845
- 6  event after topinvmass  : 1828	0.0273845
- 7  event after leptinvmass : 1347	0.0201789
- 8  event after numb_jet =1 : 79	0.00118347
- 9  event after numb_jet =1 : 79	0.00118347
- 10 event after jet_eta>2.5 : 79	0.00118347
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 21611	0.323746	177.881
+ 4  event after met > 50    : 7971	0.11941	65.6098
+ 4  event after alp_t > 0.5 : 7971	0.11941	65.6098
+ 5  event after btag = 1    : 2167	0.032463	17.8367
+ 5a event after delta Eta   : 1828	0.0273845	15.0464
+ 6  event after topinvmass  : 1828	0.0273845	15.0464
+ 7  event after leptinvmass : 1347	0.0201789	11.0872
+ 8  event after numb_jet =1 : 79	0.00118347	0.650254
+ 9  event after numb_jet =1 : 79	0.00118347	0.650254
+ 10 event after jet_eta>2.5 : 79	0.00118347	0.650254
  10 final counter           : 79	0.00118347
 _____________________________________________________________________
  ntuple create eff : 0.066753    analyze event eff : 0.00118347    final eff 7.9e-05
@@ -70,43 +70,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:54
+22:42:48
 Set Branch Addresses
 Reading TREE: 67438 events available, 
 		-1 of them will be analyzed.
-18:29:54
+22:42:48
 10%	
-18:29:54
+22:42:48
 20%	
-18:29:54
+22:42:48
 30%	
-18:29:54
+22:42:49
 40%	
-18:29:54
+22:42:49
 50%	
-18:29:54
+22:42:49
 60%	
-18:29:54
+22:42:49
 70%	
-18:29:54
+22:42:49
 80%	
-18:29:54
+22:42:49
 90%	
 nevents : 67438
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 22323	0.331015
- 4  event after met > 50    : 7457	0.110576
- 4  event after alp_t > 0.5 : 7457	0.110576
- 5  event after btag = 1    : 1769	0.0262315
- 5a event after delta Eta   : 1504	0.022302
- 6  event after topinvmass  : 1504	0.022302
- 7  event after leptinvmass : 1081	0.0160295
- 8  event after numb_jet =1 : 22	0.000326226
- 9  event after numb_jet =1 : 22	0.000326226
- 10 event after jet_eta>2.5 : 22	0.000326226
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 22323	0.331015	5135.64
+ 4  event after met > 50    : 7457	0.110576	1715.56
+ 4  event after alp_t > 0.5 : 7457	0.110576	1715.56
+ 5  event after btag = 1    : 1769	0.0262315	406.977
+ 5a event after delta Eta   : 1504	0.022302	346.011
+ 6  event after topinvmass  : 1504	0.022302	346.011
+ 7  event after leptinvmass : 1081	0.0160295	248.695
+ 8  event after numb_jet =1 : 22	0.000326226	5.06133
+ 9  event after numb_jet =1 : 22	0.000326226	5.06133
+ 10 event after jet_eta>2.5 : 22	0.000326226	5.06133
  10 final counter           : 22	0.000326226
 _____________________________________________________________________
  ntuple create eff : 0.067438    analyze event eff : 0.000326226    final eff 2.2e-05
@@ -126,43 +126,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:54
+22:42:49
 Set Branch Addresses
 Reading TREE: 67451 events available, 
 		-1 of them will be analyzed.
-18:29:54
+22:42:49
 10%	
-18:29:54
+22:42:49
 20%	
-18:29:54
+22:42:49
 30%	
-18:29:54
+22:42:49
 40%	
-18:29:54
+22:42:49
 50%	
-18:29:54
+22:42:49
 60%	
-18:29:54
+22:42:49
 70%	
-18:29:55
+22:42:49
 80%	
-18:29:55
+22:42:49
 90%	
 nevents : 67451
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 22031	0.326622
- 4  event after met > 50    : 7800	0.11564
- 4  event after alp_t > 0.5 : 7800	0.11564
- 5  event after btag = 1    : 1860	0.0275756
- 5a event after delta Eta   : 1590	0.0235727
- 6  event after topinvmass  : 1590	0.0235727
- 7  event after leptinvmass : 1139	0.0168863
- 8  event after numb_jet =1 : 30	0.000444767
- 9  event after numb_jet =1 : 30	0.000444767
- 10 event after jet_eta>2.5 : 30	0.000444767
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 22031	0.326622	4416.01
+ 4  event after met > 50    : 7800	0.11564	1563.47
+ 4  event after alp_t > 0.5 : 7800	0.11564	1563.47
+ 5  event after btag = 1    : 1860	0.0275756	372.828
+ 5a event after delta Eta   : 1590	0.0235727	318.708
+ 6  event after topinvmass  : 1590	0.0235727	318.708
+ 7  event after leptinvmass : 1139	0.0168863	228.307
+ 8  event after numb_jet =1 : 30	0.000444767	6.01335
+ 9  event after numb_jet =1 : 30	0.000444767	6.01335
+ 10 event after jet_eta>2.5 : 30	0.000444767	6.01335
  10 final counter           : 30	0.000444767
 _____________________________________________________________________
  ntuple create eff : 0.067451    analyze event eff : 0.000444767    final eff 3e-05
@@ -182,43 +182,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:55
+22:42:50
 Set Branch Addresses
 Reading TREE: 87653 events available, 
 		-1 of them will be analyzed.
-18:29:55
+22:42:50
 10%	
-18:29:55
+22:42:50
 20%	
-18:29:55
+22:42:50
 30%	
-18:29:55
+22:42:50
 40%	
-18:29:55
+22:42:50
 50%	
-18:29:55
+22:42:50
 60%	
-18:29:55
+22:42:50
 70%	
-18:29:55
+22:42:50
 80%	
-18:29:55
+22:42:50
 90%	
 nevents : 87653
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 24032	0.274172
- 4  event after met > 50    : 12882	0.146966
- 4  event after alp_t > 0.5 : 12882	0.146966
- 5  event after btag = 1    : 3130	0.035709
- 5a event after delta Eta   : 2563	0.0292403
- 6  event after topinvmass  : 2563	0.0292403
- 7  event after leptinvmass : 1569	0.0179001
- 8  event after numb_jet =1 : 41	0.000467754
- 9  event after numb_jet =1 : 41	0.000467754
- 10 event after jet_eta>2.5 : 41	0.000467754
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 24032	0.274172	1404.38
+ 4  event after met > 50    : 12882	0.146966	752.798
+ 4  event after alp_t > 0.5 : 12882	0.146966	752.798
+ 5  event after btag = 1    : 3130	0.035709	182.911
+ 5a event after delta Eta   : 2563	0.0292403	149.777
+ 6  event after topinvmass  : 2563	0.0292403	149.777
+ 7  event after leptinvmass : 1569	0.0179001	91.6892
+ 8  event after numb_jet =1 : 41	0.000467754	2.39596
+ 9  event after numb_jet =1 : 41	0.000467754	2.39596
+ 10 event after jet_eta>2.5 : 41	0.000467754	2.39596
  10 final counter           : 41	0.000467754
 _____________________________________________________________________
  ntuple create eff : 0.087653    analyze event eff : 0.000467754    final eff 4.1e-05
@@ -238,43 +238,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:55
+22:42:50
 Set Branch Addresses
 Reading TREE: 108201 events available, 
 		-1 of them will be analyzed.
-18:29:56
+22:42:51
 10%	
-18:29:56
+22:42:51
 20%	
-18:29:56
+22:42:51
 30%	
-18:29:56
+22:42:51
 40%	
-18:29:56
+22:42:51
 50%	
-18:29:56
+22:42:51
 60%	
-18:29:56
+22:42:51
 70%	
-18:29:56
+22:42:51
 80%	
-18:29:56
+22:42:51
 90%	
 nevents : 108201
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 25366	0.234434
- 4  event after met > 50    : 9467	0.0874946
- 4  event after alp_t > 0.5 : 9467	0.0874946
- 5  event after btag = 1    : 2769	0.0255913
- 5a event after delta Eta   : 2307	0.0213214
- 6  event after topinvmass  : 2307	0.0213214
- 7  event after leptinvmass : 759	0.00701472
- 8  event after numb_jet =1 : 50	0.000462103
- 9  event after numb_jet =1 : 50	0.000462103
- 10 event after jet_eta>2.5 : 50	0.000462103
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 25366	0.234434	1583.18
+ 4  event after met > 50    : 9467	0.0874946	590.87
+ 4  event after alp_t > 0.5 : 9467	0.0874946	590.87
+ 5  event after btag = 1    : 2769	0.0255913	172.823
+ 5a event after delta Eta   : 2307	0.0213214	143.988
+ 6  event after topinvmass  : 2307	0.0213214	143.988
+ 7  event after leptinvmass : 759	0.00701472	47.3719
+ 8  event after numb_jet =1 : 50	0.000462103	3.12068
+ 9  event after numb_jet =1 : 50	0.000462103	3.12068
+ 10 event after jet_eta>2.5 : 50	0.000462103	3.12068
  10 final counter           : 50	0.000462103
 _____________________________________________________________________
  ntuple create eff : 0.108201    analyze event eff : 0.000462103    final eff 5e-05
@@ -294,43 +294,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:56
+22:42:51
 Set Branch Addresses
 Reading TREE: 137932 events available, 
 		-1 of them will be analyzed.
-18:29:56
+22:42:51
 10%	
-18:29:56
+22:42:52
 20%	
-18:29:56
+22:42:52
 30%	
-18:29:56
+22:42:52
 40%	
-18:29:56
+22:42:52
 50%	
-18:29:56
+22:42:52
 60%	
-18:29:56
+22:42:52
 70%	
-18:29:57
+22:42:52
 80%	
-18:29:57
+22:42:52
 90%	
 nevents : 137932
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 34039	0.246781
- 4  event after met > 50    : 11877	0.0861076
- 4  event after alp_t > 0.5 : 11877	0.0861076
- 5  event after btag = 1    : 2915	0.0211336
- 5a event after delta Eta   : 2466	0.0178784
- 6  event after topinvmass  : 2466	0.0178784
- 7  event after leptinvmass : 736	0.00533596
- 8  event after numb_jet =1 : 38	0.000275498
- 9  event after numb_jet =1 : 38	0.000275498
- 10 event after jet_eta>2.5 : 38	0.000275498
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 34039	0.246781	43454.1
+ 4  event after met > 50    : 11877	0.0861076	15162.2
+ 4  event after alp_t > 0.5 : 11877	0.0861076	15162.2
+ 5  event after btag = 1    : 2915	0.0211336	3721.28
+ 5a event after delta Eta   : 2466	0.0178784	3148.09
+ 6  event after topinvmass  : 2466	0.0178784	3148.09
+ 7  event after leptinvmass : 736	0.00533596	939.576
+ 8  event after numb_jet =1 : 38	0.000275498	48.5107
+ 9  event after numb_jet =1 : 38	0.000275498	48.5107
+ 10 event after jet_eta>2.5 : 38	0.000275498	48.5107
  10 final counter           : 38	0.000275498
 _____________________________________________________________________
  ntuple create eff : 0.125393    analyze event eff : 0.000275498    final eff 3.45455e-05
@@ -350,43 +350,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:57
+22:42:52
 Set Branch Addresses
 Reading TREE: 124135 events available, 
 		-1 of them will be analyzed.
-18:29:57
+22:42:52
 10%	
-18:29:57
+22:42:52
 20%	
-18:29:57
+22:42:53
 30%	
-18:29:57
+22:42:53
 40%	
-18:29:57
+22:42:53
 50%	
-18:29:57
+22:42:53
 60%	
-18:29:57
+22:42:53
 70%	
-18:29:57
+22:42:53
 80%	
-18:29:57
+22:42:53
 90%	
 nevents : 124135
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 29926	0.241076
- 4  event after met > 50    : 10896	0.0877754
- 4  event after alp_t > 0.5 : 10896	0.0877754
- 5  event after btag = 1    : 2897	0.0233375
- 5a event after delta Eta   : 2356	0.0189793
- 6  event after topinvmass  : 2356	0.0189793
- 7  event after leptinvmass : 716	0.00576791
- 8  event after numb_jet =1 : 17	0.000136948
- 9  event after numb_jet =1 : 17	0.000136948
- 10 event after jet_eta>2.5 : 17	0.000136948
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 29926	0.241076	36918.1
+ 4  event after met > 50    : 10896	0.0877754	13441.8
+ 4  event after alp_t > 0.5 : 10896	0.0877754	13441.8
+ 5  event after btag = 1    : 2897	0.0233375	3573.88
+ 5a event after delta Eta   : 2356	0.0189793	2906.47
+ 6  event after topinvmass  : 2356	0.0189793	2906.47
+ 7  event after leptinvmass : 716	0.00576791	883.291
+ 8  event after numb_jet =1 : 17	0.000136948	20.972
+ 9  event after numb_jet =1 : 17	0.000136948	20.972
+ 10 event after jet_eta>2.5 : 17	0.000136948	20.972
  10 final counter           : 17	0.000136948
 _____________________________________________________________________
  ntuple create eff : 0.124135    analyze event eff : 0.000136948    final eff 1.7e-05
@@ -406,43 +406,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:58
+22:42:53
 Set Branch Addresses
 Reading TREE: 230037 events available, 
 		-1 of them will be analyzed.
-18:29:58
+22:42:54
 10%	
-18:29:58
+22:42:54
 20%	
-18:29:58
+22:42:54
 30%	
-18:29:58
+22:42:54
 40%	
-18:29:58
+22:42:54
 50%	
-18:29:58
+22:42:54
 60%	
-18:29:58
+22:42:54
 70%	
-18:29:58
+22:42:55
 80%	
-18:29:58
+22:42:55
 90%	
 nevents : 230037
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 46069	0.200268
- 4  event after met > 50    : 22756	0.0989232
- 4  event after alp_t > 0.5 : 22756	0.0989232
- 5  event after btag = 1    : 5607	0.0243743
- 5a event after delta Eta   : 4355	0.0189317
- 6  event after topinvmass  : 4355	0.0189317
- 7  event after leptinvmass : 1678	0.00729448
- 8  event after numb_jet =1 : 45	0.000195621
- 9  event after numb_jet =1 : 45	0.000195621
- 10 event after jet_eta>2.5 : 45	0.000195621
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 46069	0.200268	10903.8
+ 4  event after met > 50    : 22756	0.0989232	5385.96
+ 4  event after alp_t > 0.5 : 22756	0.0989232	5385.96
+ 5  event after btag = 1    : 5607	0.0243743	1327.08
+ 5a event after delta Eta   : 4355	0.0189317	1030.76
+ 6  event after topinvmass  : 4355	0.0189317	1030.76
+ 7  event after leptinvmass : 1678	0.00729448	397.154
+ 8  event after numb_jet =1 : 45	0.000195621	10.6507
+ 9  event after numb_jet =1 : 45	0.000195621	10.6507
+ 10 event after jet_eta>2.5 : 45	0.000195621	10.6507
  10 final counter           : 45	0.000195621
 _____________________________________________________________________
  ntuple create eff : 0.209125    analyze event eff : 0.000195621    final eff 4.09091e-05
@@ -462,43 +462,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:29:59
+22:42:55
 Set Branch Addresses
 Reading TREE: 335202 events available, 
 		-1 of them will be analyzed.
-18:29:59
+22:42:56
 10%	
-18:29:59
+22:42:56
 20%	
-18:29:59
+22:42:57
 30%	
-18:29:59
+22:42:57
 40%	
-18:29:59
+22:42:57
 50%	
-18:30:00
+22:42:58
 60%	
-18:30:00
+22:42:58
 70%	
-18:30:00
+22:42:58
 80%	
-18:30:00
+22:42:58
 90%	
 nevents : 335202
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 73777	0.220097
- 4  event after met > 50    : 49759	0.148445
- 4  event after alp_t > 0.5 : 49759	0.148445
- 5  event after btag = 1    : 15530	0.0463303
- 5a event after delta Eta   : 12188	0.0363602
- 6  event after topinvmass  : 12188	0.0363602
- 7  event after leptinvmass : 3976	0.0118615
- 8  event after numb_jet =1 : 64	0.00019093
- 9  event after numb_jet =1 : 64	0.00019093
- 10 event after jet_eta>2.5 : 64	0.00019093
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 73777	0.220097	23704.5
+ 4  event after met > 50    : 49759	0.148445	15987.5
+ 4  event after alp_t > 0.5 : 49759	0.148445	15987.5
+ 5  event after btag = 1    : 15530	0.0463303	4989.77
+ 5a event after delta Eta   : 12188	0.0363602	3915.99
+ 6  event after topinvmass  : 12188	0.0363602	3915.99
+ 7  event after leptinvmass : 3976	0.0118615	1277.48
+ 8  event after numb_jet =1 : 64	0.00019093	20.5631
+ 9  event after numb_jet =1 : 64	0.00019093	20.5631
+ 10 event after jet_eta>2.5 : 64	0.00019093	20.5631
  10 final counter           : 64	0.00019093
 _____________________________________________________________________
  ntuple create eff : 0.39632    analyze event eff : 0.00019093    final eff 7.56693e-05
@@ -518,43 +518,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:00
+22:42:59
 Set Branch Addresses
 Reading TREE: 314462 events available, 
 		-1 of them will be analyzed.
-18:30:01
+22:42:59
 10%	
-18:30:01
+22:42:59
 20%	
-18:30:01
+22:42:59
 30%	
-18:30:01
+22:42:59
 40%	
-18:30:01
+22:43:00
 50%	
-18:30:01
+22:43:00
 60%	
-18:30:01
+22:43:00
 70%	
-18:30:01
+22:43:00
 80%	
-18:30:02
+22:43:00
 90%	
 nevents : 314462
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 69381	0.220634
- 4  event after met > 50    : 36655	0.116564
- 4  event after alp_t > 0.5 : 36655	0.116564
- 5  event after btag = 1    : 11595	0.0368725
- 5a event after delta Eta   : 9189	0.0292213
- 6  event after topinvmass  : 9189	0.0292213
- 7  event after leptinvmass : 3780	0.0120205
- 8  event after numb_jet =1 : 8	2.54403e-05
- 9  event after numb_jet =1 : 8	2.54403e-05
- 10 event after jet_eta>2.5 : 8	2.54403e-05
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 69381	0.220634	80465.2
+ 4  event after met > 50    : 36655	0.116564	42511
+ 4  event after alp_t > 0.5 : 36655	0.116564	42511
+ 5  event after btag = 1    : 11595	0.0368725	13447.4
+ 5a event after delta Eta   : 9189	0.0292213	10657
+ 6  event after topinvmass  : 9189	0.0292213	10657
+ 7  event after leptinvmass : 3780	0.0120205	4383.89
+ 8  event after numb_jet =1 : 8	2.54403e-05	9.27807
+ 9  event after numb_jet =1 : 8	2.54403e-05	9.27807
+ 10 event after jet_eta>2.5 : 8	2.54403e-05	9.27807
  10 final counter           : 8	2.54403e-05
 _____________________________________________________________________
  ntuple create eff : 0.368491    analyze event eff : 2.54403e-05    final eff 9.37451e-06
@@ -574,43 +574,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:02
+22:43:01
 Set Branch Addresses
 Reading TREE: 18 events available, 
 		-1 of them will be analyzed.
-18:30:02
+22:43:01
 10%	
-18:30:02
+22:43:01
 20%	
-18:30:02
+22:43:01
 30%	
-18:30:02
+22:43:01
 40%	
-18:30:02
+22:43:01
 50%	
-18:30:02
+22:43:01
 60%	
-18:30:02
+22:43:01
 70%	
-18:30:02
+22:43:01
 80%	
-18:30:02
+22:43:01
 90%	
 nevents : 18
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 8	0.444444
- 4  event after met > 50    : 1	0.0555556
- 4  event after alp_t > 0.5 : 1	0.0555556
- 5  event after btag = 1    : 1	0.0555556
- 5a event after delta Eta   : 0	0
- 6  event after topinvmass  : 0	0
- 7  event after leptinvmass : 0	0
- 8  event after numb_jet =1 : 0	0
- 9  event after numb_jet =1 : 0	0
- 10 event after jet_eta>2.5 : 0	0
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 8	0.444444	250089
+ 4  event after met > 50    : 1	0.0555556	31261.1
+ 4  event after alp_t > 0.5 : 1	0.0555556	31261.1
+ 5  event after btag = 1    : 1	0.0555556	31261.1
+ 5a event after delta Eta   : 0	0	0
+ 6  event after topinvmass  : 0	0	0
+ 7  event after leptinvmass : 0	0	0
+ 8  event after numb_jet =1 : 0	0	0
+ 9  event after numb_jet =1 : 0	0	0
+ 10 event after jet_eta>2.5 : 0	0	0
  10 final counter           : 0	0
 _____________________________________________________________________
  ntuple create eff : 2.11115e-05    analyze event eff : 0    final eff 0
@@ -630,43 +630,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:02
+22:43:01
 Set Branch Addresses
 Reading TREE: 535720 events available, 
 		-1 of them will be analyzed.
-18:30:02
+22:43:01
 10%	
-18:30:03
+22:43:01
 20%	
-18:30:03
+22:43:02
 30%	
-18:30:03
+22:43:02
 40%	
-18:30:03
+22:43:02
 50%	
-18:30:03
+22:43:02
 60%	
-18:30:03
+22:43:03
 70%	
-18:30:04
+22:43:03
 80%	
-18:30:04
+22:43:03
 90%	
 nevents : 535720
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 173581	0.324014
- 4  event after met > 50    : 17557	0.0327727
- 4  event after alp_t > 0.5 : 17557	0.0327727
- 5  event after btag = 1    : 1259	0.00235011
- 5a event after delta Eta   : 978	0.00182558
- 6  event after topinvmass  : 978	0.00182558
- 7  event after leptinvmass : 247	0.000461062
- 8  event after numb_jet =1 : 83	0.000154932
- 9  event after numb_jet =1 : 83	0.000154932
- 10 event after jet_eta>2.5 : 83	0.000154932
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 173581	0.324014	3.0506e+06
+ 4  event after met > 50    : 17557	0.0327727	308555
+ 4  event after alp_t > 0.5 : 17557	0.0327727	308555
+ 5  event after btag = 1    : 1259	0.00235011	22126.3
+ 5a event after delta Eta   : 978	0.00182558	17187.8
+ 6  event after topinvmass  : 978	0.00182558	17187.8
+ 7  event after leptinvmass : 247	0.000461062	4340.9
+ 8  event after numb_jet =1 : 83	0.000154932	1458.68
+ 9  event after numb_jet =1 : 83	0.000154932	1458.68
+ 10 event after jet_eta>2.5 : 83	0.000154932	1458.68
  10 final counter           : 83	0.000154932
 _____________________________________________________________________
  ntuple create eff : 0.178181    analyze event eff : 0.000154932    final eff 2.76059e-05
@@ -686,43 +686,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:04
+22:43:03
 Set Branch Addresses
 Reading TREE: 383829 events available, 
 		-1 of them will be analyzed.
-18:30:04
+22:43:04
 10%	
-18:30:04
+22:43:04
 20%	
-18:30:04
+22:43:04
 30%	
-18:30:05
+22:43:04
 40%	
-18:30:05
+22:43:04
 50%	
-18:30:05
+22:43:04
 60%	
-18:30:05
+22:43:04
 70%	
-18:30:05
+22:43:05
 80%	
-18:30:05
+22:43:05
 90%	
 nevents : 383829
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 123016	0.320497
- 4  event after met > 50    : 15233	0.0396869
- 4  event after alp_t > 0.5 : 15233	0.0396869
- 5  event after btag = 1    : 962	0.00250632
- 5a event after delta Eta   : 722	0.00188105
- 6  event after topinvmass  : 722	0.00188105
- 7  event after leptinvmass : 193	0.000502828
- 8  event after numb_jet =1 : 48	0.000125056
- 9  event after numb_jet =1 : 48	0.000125056
- 10 event after jet_eta>2.5 : 48	0.000125056
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 123016	0.320497	2.33064e+06
+ 4  event after met > 50    : 15233	0.0396869	288602
+ 4  event after alp_t > 0.5 : 15233	0.0396869	288602
+ 5  event after btag = 1    : 962	0.00250632	18225.9
+ 5a event after delta Eta   : 722	0.00188105	13678.9
+ 6  event after topinvmass  : 722	0.00188105	13678.9
+ 7  event after leptinvmass : 193	0.000502828	3656.54
+ 8  event after numb_jet =1 : 48	0.000125056	909.399
+ 9  event after numb_jet =1 : 48	0.000125056	909.399
+ 10 event after jet_eta>2.5 : 48	0.000125056	909.399
  10 final counter           : 48	0.000125056
 _____________________________________________________________________
  ntuple create eff : 0.234546    analyze event eff : 0.000125056    final eff 2.93313e-05
@@ -742,43 +742,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:05
+22:43:05
 Set Branch Addresses
 Reading TREE: 346041 events available, 
 		-1 of them will be analyzed.
-18:30:06
+22:43:05
 10%	
-18:30:06
+22:43:06
 20%	
-18:30:06
+22:43:06
 30%	
-18:30:06
+22:43:06
 40%	
-18:30:06
+22:43:06
 50%	
-18:30:06
+22:43:06
 60%	
-18:30:06
+22:43:07
 70%	
-18:30:06
+22:43:07
 80%	
-18:30:06
+22:43:07
 90%	
 nevents : 346041
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 104555	0.302146
- 4  event after met > 50    : 16978	0.0490636
- 4  event after alp_t > 0.5 : 16978	0.0490636
- 5  event after btag = 1    : 1068	0.00308634
- 5a event after delta Eta   : 782	0.00225985
- 6  event after topinvmass  : 782	0.00225985
- 7  event after leptinvmass : 215	0.000621314
- 8  event after numb_jet =1 : 42	0.000121373
- 9  event after numb_jet =1 : 42	0.000121373
- 10 event after jet_eta>2.5 : 42	0.000121373
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 104555	0.302146	1.1204e+06
+ 4  event after met > 50    : 16978	0.0490636	181934
+ 4  event after alp_t > 0.5 : 16978	0.0490636	181934
+ 5  event after btag = 1    : 1068	0.00308634	11444.6
+ 5a event after delta Eta   : 782	0.00225985	8379.81
+ 6  event after topinvmass  : 782	0.00225985	8379.81
+ 7  event after leptinvmass : 215	0.000621314	2303.91
+ 8  event after numb_jet =1 : 42	0.000121373	450.067
+ 9  event after numb_jet =1 : 42	0.000121373	450.067
+ 10 event after jet_eta>2.5 : 42	0.000121373	450.067
  10 final counter           : 42	0.000121373
 _____________________________________________________________________
  ntuple create eff : 0.277445    analyze event eff : 0.000121373    final eff 3.36742e-05
@@ -798,43 +798,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:07
+22:43:07
 Set Branch Addresses
 Reading TREE: 135696 events available, 
 		-1 of them will be analyzed.
-18:30:07
+22:43:07
 10%	
-18:30:07
+22:43:08
 20%	
-18:30:07
+22:43:08
 30%	
-18:30:07
+22:43:08
 40%	
-18:30:07
+22:43:08
 50%	
-18:30:07
+22:43:08
 60%	
-18:30:07
+22:43:08
 70%	
-18:30:07
+22:43:08
 80%	
-18:30:07
+22:43:08
 90%	
 nevents : 135696
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 44923	0.331056
- 4  event after met > 50    : 6291	0.046361
- 4  event after alp_t > 0.5 : 6291	0.046361
- 5  event after btag = 1    : 1017	0.00749469
- 5a event after delta Eta   : 770	0.00567445
- 6  event after topinvmass  : 770	0.00567445
- 7  event after leptinvmass : 203	0.00149599
- 8  event after numb_jet =1 : 51	0.00037584
- 9  event after numb_jet =1 : 51	0.00037584
- 10 event after jet_eta>2.5 : 51	0.00037584
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 44923	0.331056	36696.1
+ 4  event after met > 50    : 6291	0.046361	5138.9
+ 4  event after alp_t > 0.5 : 6291	0.046361	5138.9
+ 5  event after btag = 1    : 1017	0.00749469	830.753
+ 5a event after delta Eta   : 770	0.00567445	628.987
+ 6  event after topinvmass  : 770	0.00567445	628.987
+ 7  event after leptinvmass : 203	0.00149599	165.824
+ 8  event after numb_jet =1 : 51	0.00037584	41.6602
+ 9  event after numb_jet =1 : 51	0.00037584	41.6602
+ 10 event after jet_eta>2.5 : 51	0.00037584	41.6602
  10 final counter           : 51	0.00037584
 _____________________________________________________________________
  ntuple create eff : 0.135696    analyze event eff : 0.00037584    final eff 5.1e-05
@@ -854,43 +854,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:07
+22:43:08
 Set Branch Addresses
 Reading TREE: 254588 events available, 
 		-1 of them will be analyzed.
-18:30:08
+22:43:08
 10%	
-18:30:08
+22:43:09
 20%	
-18:30:08
+22:43:09
 30%	
-18:30:08
+22:43:09
 40%	
-18:30:08
+22:43:09
 50%	
-18:30:08
+22:43:09
 60%	
-18:30:08
+22:43:09
 70%	
-18:30:08
+22:43:09
 80%	
-18:30:08
+22:43:09
 90%	
 nevents : 254588
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 76106	0.298938
- 4  event after met > 50    : 15909	0.0624892
- 4  event after alp_t > 0.5 : 15909	0.0624892
- 5  event after btag = 1    : 2445	0.00960375
- 5a event after delta Eta   : 1481	0.00581724
- 6  event after topinvmass  : 1481	0.00581724
- 7  event after leptinvmass : 464	0.00182255
- 8  event after numb_jet =1 : 45	0.000176756
- 9  event after numb_jet =1 : 45	0.000176756
- 10 event after jet_eta>2.5 : 45	0.000176756
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 76106	0.298938	64174.6
+ 4  event after met > 50    : 15909	0.0624892	13414.9
+ 4  event after alp_t > 0.5 : 15909	0.0624892	13414.9
+ 5  event after btag = 1    : 2445	0.00960375	2061.69
+ 5a event after delta Eta   : 1481	0.00581724	1248.82
+ 6  event after topinvmass  : 1481	0.00581724	1248.82
+ 7  event after leptinvmass : 464	0.00182255	391.257
+ 8  event after numb_jet =1 : 45	0.000176756	37.9452
+ 9  event after numb_jet =1 : 45	0.000176756	37.9452
+ 10 event after jet_eta>2.5 : 45	0.000176756	37.9452
  10 final counter           : 45	0.000176756
 _____________________________________________________________________
  ntuple create eff : 0.218613    analyze event eff : 0.000176756    final eff 3.86413e-05
@@ -910,43 +910,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:09
+22:43:10
 Set Branch Addresses
 Reading TREE: 166347 events available, 
 		-1 of them will be analyzed.
-18:30:09
+22:43:10
 10%	
-18:30:09
+22:43:10
 20%	
-18:30:09
+22:43:10
 30%	
-18:30:09
+22:43:10
 40%	
-18:30:09
+22:43:10
 50%	
-18:30:09
+22:43:10
 60%	
-18:30:09
+22:43:10
 70%	
-18:30:09
+22:43:11
 80%	
-18:30:09
+22:43:11
 90%	
 nevents : 166347
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 45734	0.274931
- 4  event after met > 50    : 11999	0.0721323
- 4  event after alp_t > 0.5 : 11999	0.0721323
- 5  event after btag = 1    : 1790	0.0107606
- 5a event after delta Eta   : 1018	0.00611974
- 6  event after topinvmass  : 1018	0.00611974
- 7  event after leptinvmass : 376	0.00226034
- 8  event after numb_jet =1 : 20	0.000120231
- 9  event after numb_jet =1 : 20	0.000120231
- 10 event after jet_eta>2.5 : 20	0.000120231
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 45734	0.274931	46205.5
+ 4  event after met > 50    : 11999	0.0721323	12122.7
+ 4  event after alp_t > 0.5 : 11999	0.0721323	12122.7
+ 5  event after btag = 1    : 1790	0.0107606	1808.45
+ 5a event after delta Eta   : 1018	0.00611974	1028.49
+ 6  event after topinvmass  : 1018	0.00611974	1028.49
+ 7  event after leptinvmass : 376	0.00226034	379.876
+ 8  event after numb_jet =1 : 20	0.000120231	20.2062
+ 9  event after numb_jet =1 : 20	0.000120231	20.2062
+ 10 event after jet_eta>2.5 : 20	0.000120231	20.2062
  10 final counter           : 20	0.000120231
 _____________________________________________________________________
  ntuple create eff : 0.250249    analyze event eff : 0.000120231    final eff 3.00876e-05
@@ -966,43 +966,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:09
+22:43:11
 Set Branch Addresses
 Reading TREE: 2192761 events available, 
 		-1 of them will be analyzed.
-18:30:10
+22:43:12
 10%	
-18:30:11
+22:43:13
 20%	
-18:30:11
+22:43:13
 30%	
-18:30:12
+22:43:14
 40%	
-18:30:12
+22:43:15
 50%	
-18:30:13
+22:43:15
 60%	
-18:30:13
+22:43:16
 70%	
-18:30:14
+22:43:17
 80%	
-18:30:14
+22:43:17
 90%	
 nevents : 2192761
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 830748	0.378859
- 4  event after met > 50    : 73263	0.0334113
- 4  event after alp_t > 0.5 : 73263	0.0334113
- 5  event after btag = 1    : 898	0.000409529
- 5a event after delta Eta   : 592	0.000269979
- 6  event after topinvmass  : 592	0.000269979
- 7  event after leptinvmass : 44	2.0066e-05
- 8  event after numb_jet =1 : 24	1.09451e-05
- 9  event after numb_jet =1 : 24	1.09451e-05
- 10 event after jet_eta>2.5 : 24	1.09451e-05
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 830748	0.378859	5.44751e+07
+ 4  event after met > 50    : 73263	0.0334113	4.80411e+06
+ 4  event after alp_t > 0.5 : 73263	0.0334113	4.80411e+06
+ 5  event after btag = 1    : 898	0.000409529	58885
+ 5a event after delta Eta   : 592	0.000269979	38819.5
+ 6  event after topinvmass  : 592	0.000269979	38819.5
+ 7  event after leptinvmass : 44	2.0066e-05	2885.23
+ 8  event after numb_jet =1 : 24	1.09451e-05	1573.76
+ 9  event after numb_jet =1 : 24	1.09451e-05	1573.76
+ 10 event after jet_eta>2.5 : 24	1.09451e-05	1573.76
  10 final counter           : 24	1.09451e-05
 _____________________________________________________________________
  ntuple create eff : 0.0721303    analyze event eff : 1.09451e-05    final eff 7.89474e-07
@@ -1022,43 +1022,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:15
+22:43:18
 Set Branch Addresses
 Reading TREE: 1238579 events available, 
 		-1 of them will be analyzed.
-18:30:16
+22:43:19
 10%	
-18:30:16
+22:43:19
 20%	
-18:30:16
+22:43:20
 30%	
-18:30:17
+22:43:20
 40%	
-18:30:17
+22:43:21
 50%	
-18:30:17
+22:43:21
 60%	
-18:30:18
+22:43:21
 70%	
-18:30:18
+22:43:22
 80%	
-18:30:18
+22:43:22
 90%	
 nevents : 1238579
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 415889	0.335779
- 4  event after met > 50    : 58562	0.0472816
- 4  event after alp_t > 0.5 : 58562	0.0472816
- 5  event after btag = 1    : 1090	0.000880041
- 5a event after delta Eta   : 765	0.000617643
- 6  event after topinvmass  : 765	0.000617643
- 7  event after leptinvmass : 204	0.000164705
- 8  event after numb_jet =1 : 33	2.66434e-05
- 9  event after numb_jet =1 : 33	2.66434e-05
- 10 event after jet_eta>2.5 : 33	2.66434e-05
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 415889	0.335779	1.52637e+07
+ 4  event after met > 50    : 58562	0.0472816	2.1493e+06
+ 4  event after alp_t > 0.5 : 58562	0.0472816	2.1493e+06
+ 5  event after btag = 1    : 1090	0.000880041	40004.4
+ 5a event after delta Eta   : 765	0.000617643	28076.5
+ 6  event after topinvmass  : 765	0.000617643	28076.5
+ 7  event after leptinvmass : 204	0.000164705	7487.06
+ 8  event after numb_jet =1 : 33	2.66434e-05	1211.14
+ 9  event after numb_jet =1 : 33	2.66434e-05	1211.14
+ 10 event after jet_eta>2.5 : 33	2.66434e-05	1211.14
  10 final counter           : 33	2.66434e-05
 _____________________________________________________________________
  ntuple create eff : 0.328031    analyze event eff : 2.66434e-05    final eff 8.73989e-06
@@ -1078,43 +1078,43 @@ SaveData                =                               true
 ________________________________________________________________
 
 time start  
-18:30:19
+22:43:23
 Set Branch Addresses
 Reading TREE: 830247 events available, 
 		-1 of them will be analyzed.
-18:30:19
+22:43:23
 10%	
-18:30:19
+22:43:24
 20%	
-18:30:20
+22:43:24
 30%	
-18:30:20
+22:43:24
 40%	
-18:30:20
+22:43:25
 50%	
-18:30:20
+22:43:25
 60%	
-18:30:21
+22:43:25
 70%	
-18:30:21
+22:43:26
 80%	
-18:30:21
+22:43:26
 90%	
 nevents : 830247
 _____________________________________________________________________
- 0  event after trigger     : 0	0
- 1  event after hard photon : 0	0
- 2  event after 10gev       : 0	0
- 3  event after Lep(PT)>55  : 253483	0.30531
- 4  event after met > 50    : 51266	0.0617479
- 4  event after alp_t > 0.5 : 51266	0.0617479
- 5  event after btag = 1    : 1293	0.00155737
- 5a event after delta Eta   : 848	0.00102138
- 6  event after topinvmass  : 848	0.00102138
- 7  event after leptinvmass : 262	0.000315569
- 8  event after numb_jet =1 : 25	3.01115e-05
- 9  event after numb_jet =1 : 25	3.01115e-05
- 10 event after jet_eta>2.5 : 25	3.01115e-05
+ 0  event after trigger     : 0	0	0
+ 1  event after hard photon : 0	0	0
+ 2  event after 10gev       : 0	0	0
+ 3  event after Lep(PT)>55  : 253483	0.30531	5.19906e+06
+ 4  event after met > 50    : 51266	0.0617479	1.05149e+06
+ 4  event after alp_t > 0.5 : 51266	0.0617479	1.05149e+06
+ 5  event after btag = 1    : 1293	0.00155737	26520.1
+ 5a event after delta Eta   : 848	0.00102138	17392.9
+ 6  event after topinvmass  : 848	0.00102138	17392.9
+ 7  event after leptinvmass : 262	0.000315569	5373.75
+ 8  event after numb_jet =1 : 25	3.01115e-05	512.762
+ 9  event after numb_jet =1 : 25	3.01115e-05	512.762
+ 10 event after jet_eta>2.5 : 25	3.01115e-05	512.762
  10 final counter           : 25	3.01115e-05
 _____________________________________________________________________
  ntuple create eff : 0.387539    analyze event eff : 3.01115e-05    final eff 1.16694e-05
