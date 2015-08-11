@@ -62,10 +62,10 @@ const double nevents[] =
 {
     
     //mhc100 icin degerler
-    1000000*0.36,					// singletop_s
-    1000000*0.36,	// singletop_s
-    1000000*0.36,	// singletop_s
-    1000000*0.36,	// singletop_s
+    1000000,					// singletop_s
+    1000000,	// singletop_s
+    1000000,	// singletop_s
+    1000000,	// singletop_s
     
     
     1000000,		//back_singletop_s
